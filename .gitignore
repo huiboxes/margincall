@@ -1,0 +1,9 @@
+# 工具链产物（tools/ 随仓库外部提供时使用）
+tools/node_modules/
+tools/shots/
+node_modules/
+
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+*.log

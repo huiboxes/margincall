@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="K线">
+  <rect width="64" height="64" rx="14" fill="#07070f"/>
+  <!-- 左：阳线绿（涨）· 右：阴线红（跌），各一根影线 + 实体 -->
+  <g fill="#22e58a">
+    <rect x="20" y="24" width="4" height="28"/>
+    <rect x="14" y="32" width="16" height="20" rx="2"/>
+  </g>
+  <g fill="#ff5470">
+    <rect x="38" y="10" width="4" height="30"/>
+    <rect x="34" y="16" width="16" height="16" rx="2"/>
+  </g>
+</svg>
