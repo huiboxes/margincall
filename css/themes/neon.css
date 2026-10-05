@@ -1,0 +1,314 @@
+/* ═══════════════════════════════════════════════════════════
+   主题 1/5 · 霓虹夜 NEON NIGHTS
+   赛博朋克雨夜地下盘口：霓虹灯管 / 全息面板 / 湿沥青反光
+   字体：Orbitron(logo) + Chakra Petch(数字) + Noto Sans SC 900
+   ═══════════════════════════════════════════════════════════ */
+
+:root, [data-theme="neon"] {
+  --bg: #07070f;
+  --bg-2: #0d0c1c;
+  --panel: rgba(124, 108, 255, 0.06);
+  --panel-2: rgba(124, 108, 255, 0.12);
+  --card: rgba(20, 18, 46, 0.72);
+  --line: rgba(124, 168, 255, 0.18);
+  --ink: #eef2ff;
+  --ink-dim: rgba(200, 212, 255, 0.62);
+  --ink-faint: rgba(160, 172, 230, 0.38);
+  --up: #22e58a;
+  --down: #ff2e88;
+  --gold: #ffd166;
+  --accent: #7c6cff;
+  --accent-2: #22d3ee;
+  --warn: #ff9f43;
+
+  --font-display: "Orbitron", "Noto Sans SC", sans-serif;
+  --font-body: "Chakra Petch", "Noto Sans SC", sans-serif;
+  --font-num: "Chakra Petch", ui-monospace, monospace;
+
+  --neon-glow-cyan: 0 0 12px rgba(34, 211, 238, 0.75), 0 0 42px rgba(34, 211, 238, 0.28);
+  --neon-glow-pink: 0 0 12px rgba(255, 46, 136, 0.75), 0 0 42px rgba(255, 46, 136, 0.28);
+  --neon-glow-purple: 0 0 14px rgba(124, 108, 255, 0.6), 0 0 48px rgba(124, 108, 255, 0.22);
+}
+
+[data-theme="neon"] body { font-family: var(--font-body); }
+
+/* ── 全局氛围：暗角 + 细扫描线 + 颗粒 ────────────────── */
+#app[data-theme] {}
+[data-theme="neon"] #app {
+  background:
+    radial-gradient(120% 70% at 50% -10%, rgba(124, 108, 255, 0.16), transparent 55%),
+    radial-gradient(90% 50% at 85% 110%, rgba(255, 46, 136, 0.10), transparent 60%),
+    radial-gradient(80% 45% at 0% 90%, rgba(34, 211, 238, 0.08), transparent 55%),
+    var(--bg);
+}
+[data-theme="neon"] #app::after {
+  content: ""; position: absolute; inset: 0; z-index: 60; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.014) 0 1px, transparent 1px 3px);
+  mix-blend-mode: overlay;
+}
+
+/* ═══════════ 标题页 ═══════════ */
+[data-theme="neon"] #screen-title::before {
+  /* 雨丝 */
+  content: ""; position: absolute; inset: -20%; z-index: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(78deg, transparent 0 6px, rgba(140, 190, 255, 0.05) 6px 7px, transparent 7px 46px),
+    repeating-linear-gradient(82deg, transparent 0 9px, rgba(255, 46, 136, 0.035) 9px 10px, transparent 10px 64px);
+  animation: neonRain 0.9s linear infinite;
+  opacity: 0.8;
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 80%, transparent);
+}
+@keyframes neonRain { to { transform: translateY(46px); } }
+
+[data-theme="neon"] .title-head { position: relative; }
+
+/* 霓虹灯管 logo */
+.neon-logo { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.nl-main {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 52px; font-weight: 900; letter-spacing: 10px;
+  margin-left: 10px;
+}
+.nl-tube {
+  color: #fff;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 12px var(--accent-2),
+    0 0 30px var(--accent-2),
+    0 0 64px var(--accent),
+    0 0 110px var(--accent);
+  animation: tubeFlicker 5.5s infinite;
+}
+@keyframes tubeFlicker {
+  0%, 100% { opacity: 1; }
+  91% { opacity: 1; }
+  92% { opacity: 0.4; }
+  93% { opacity: 1; }
+  95% { opacity: 0.7; }
+  95.5% { opacity: 1; }
+}
+.nl-sub {
+  display: flex; align-items: center; gap: 10px;
+  font-family: "Orbitron", monospace;
+  font-size: 10px; letter-spacing: 4px;
+  color: var(--down);
+  text-shadow: var(--neon-glow-pink);
+}
+.nl-line { display: block; width: 44px; height: 1px; background: linear-gradient(90deg, transparent, var(--down)); box-shadow: var(--neon-glow-pink); }
+.nl-line:last-child { background: linear-gradient(90deg, var(--down), transparent); }
+
+[data-theme="neon"] .tagline { color: rgba(200, 212, 255, 0.75); text-shadow: 0 0 18px rgba(124, 108, 255, 0.5); }
+
+/* 主题卡片：全息橱窗 */
+[data-theme="neon"] .theme-card {
+  background: linear-gradient(165deg, rgba(30, 26, 66, 0.85), rgba(10, 9, 24, 0.9));
+  border: 1px solid rgba(124, 168, 255, 0.22);
+}
+[data-theme="neon"] .theme-card.sel {
+  border-color: var(--accent-2);
+  box-shadow: var(--neon-glow-cyan), inset 0 0 22px rgba(34, 211, 238, 0.08);
+}
+[data-theme="neon"] .tc-preview { border-bottom: 1px solid rgba(124, 168, 255, 0.15); }
+[data-theme="neon"] .tc-name { font-family: "Noto Sans SC"; font-weight: 900; }
+[data-theme="neon"] .tc-check { background: var(--accent-2); box-shadow: var(--neon-glow-cyan); }
+
+/* v4 去AI味：主按钮 = 一块真正的霓虹灯牌——暗底、灯管描边、字发光，
+   而不是"紫粉渐变底 + 无限扫光"的通用套路 */
+[data-theme="neon"] .btn-primary {
+  background: rgba(9, 14, 30, 0.92);
+  border: 1px solid var(--accent-2);
+  box-shadow: var(--neon-glow-cyan), inset 0 0 16px rgba(34, 211, 238, 0.07);
+  color: #eaf6ff;
+  font-family: "Noto Sans SC"; font-weight: 900;
+  text-shadow: 0 0 8px rgba(34, 211, 238, 0.9), 0 0 24px rgba(34, 211, 238, 0.4);
+  position: relative;
+}
+[data-theme="neon"] .btn-primary:active {
+  box-shadow: 0 0 26px rgba(34, 211, 238, 0.55), inset 0 0 20px rgba(34, 211, 238, 0.14);
+}
+[data-theme="neon"] .btn-ghost { border-color: rgba(124, 168, 255, 0.3); color: var(--accent-2); }
+
+/* ═══════════ HUD ═══════════ */
+[data-theme="neon"] #hud { border-bottom: 1px solid rgba(124, 168, 255, 0.12); }
+[data-theme="neon"] .round-num { font-family: "Orbitron"; color: var(--accent-2); text-shadow: 0 0 14px rgba(34, 211, 238, 0.6); }
+[data-theme="neon"] .equity {
+  font-family: "Chakra Petch";
+  text-shadow: 0 0 20px rgba(238, 242, 255, 0.25);
+}
+[data-theme="neon"] .equity.up { text-shadow: 0 0 22px rgba(34, 229, 138, 0.55); }
+[data-theme="neon"] .equity.down { text-shadow: 0 0 22px rgba(255, 46, 136, 0.55); animation: eqGlitch 2.4s infinite; }
+@keyframes eqGlitch {
+  0%, 100% { transform: translateX(0); }
+  96% { transform: translateX(0); }
+  97% { transform: translateX(-1.5px); text-shadow: 2px 0 var(--down), -2px 0 var(--accent-2); }
+  98% { transform: translateX(1.5px); }
+}
+[data-theme="neon"] .tremor-bar { box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6); }
+[data-theme="neon"] .tremor-bar i[data-level="high"] { box-shadow: 0 0 10px var(--down); }
+
+/* ═══════════ 行情屏 ═══════════ */
+[data-theme="neon"] #market {
+  border: 1px solid rgba(124, 168, 255, 0.2);
+  background:
+    linear-gradient(180deg, rgba(16, 12, 40, 0.55), rgba(6, 6, 16, 0.82));
+  box-shadow: inset 0 0 60px rgba(8, 4, 30, 0.9), 0 0 30px rgba(124, 108, 255, 0.07);
+}
+[data-theme="neon"] #market::before {
+  content: "LIVE · 匿名标的 ???"; position: absolute; z-index: 2;
+  top: 8px; left: 50%; transform: translateX(-50%);
+  font-family: "Orbitron"; font-size: 8px; letter-spacing: 3px;
+  color: rgba(255, 46, 136, 0.85);
+  text-shadow: var(--neon-glow-pink);
+  animation: liveBlink 2s infinite;
+  pointer-events: none;
+}
+@keyframes liveBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+[data-theme="neon"] .pos-card {
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  box-shadow: var(--neon-glow-cyan);
+  background: rgba(8, 10, 26, 0.88);
+}
+[data-theme="neon"] .pos-dir.long { box-shadow: 0 0 16px rgba(34, 229, 138, 0.6); }
+[data-theme="neon"] .pos-dir.short { box-shadow: 0 0 16px rgba(255, 46, 136, 0.6); }
+
+[data-theme="neon"] .hint-chip {
+  background: rgba(10, 10, 26, 0.9);
+  border-color: rgba(124, 168, 255, 0.3);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), inset 0 0 12px rgba(124, 108, 255, 0.06);
+}
+[data-theme="neon"] .hint-chip.magic { box-shadow: 0 0 18px rgba(177, 138, 255, 0.35); }
+[data-theme="neon"] .hint-chip.gold { box-shadow: 0 0 18px rgba(255, 209, 102, 0.4); }
+
+/* ═══════════ 排名 / 槽位 ═══════════ */
+[data-theme="neon"] .rank-row { background: rgba(13, 12, 30, 0.6); border: 1px solid rgba(124, 168, 255, 0.1); }
+[data-theme="neon"] .rank-row.you {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: inset 0 0 14px rgba(34, 211, 238, 0.1), 0 0 10px rgba(34, 211, 238, 0.15);
+}
+[data-theme="neon"] .slot { background: rgba(13, 12, 30, 0.7); }
+[data-theme="neon"] .slot.filled.whale { box-shadow: 0 0 12px rgba(255, 92, 92, 0.3), inset 0 0 12px rgba(255, 92, 92, 0.12); }
+[data-theme="neon"] .slot.filled.seer { box-shadow: 0 0 12px rgba(177, 138, 255, 0.3), inset 0 0 12px rgba(177, 138, 255, 0.12); }
+[data-theme="neon"] .slot.filled.econ { box-shadow: 0 0 12px rgba(255, 209, 102, 0.25), inset 0 0 12px rgba(255, 209, 102, 0.1); }
+[data-theme="neon"] .slot.filled.wild { box-shadow: 0 0 12px rgba(34, 211, 238, 0.3), inset 0 0 12px rgba(34, 211, 238, 0.12); }
+
+/* ═══════════ 操作坞：霓虹灯管按钮 ═══════════ */
+[data-theme="neon"] .trade-btn { border-radius: 16px; }
+[data-theme="neon"] .trade-btn.buy {
+  box-shadow: 0 0 22px rgba(34, 229, 138, 0.22), inset 0 0 24px rgba(34, 229, 138, 0.08);
+  text-shadow: 0 0 14px rgba(34, 229, 138, 0.8);
+}
+[data-theme="neon"] .trade-btn.sell {
+  box-shadow: 0 0 22px rgba(255, 46, 136, 0.22), inset 0 0 24px rgba(255, 46, 136, 0.08);
+  text-shadow: 0 0 14px rgba(255, 46, 136, 0.8);
+}
+[data-theme="neon"] .trade-btn.charging.buy { box-shadow: var(--neon-glow-cyan), 0 0 40px rgba(34, 229, 138, 0.5); }
+[data-theme="neon"] .trade-btn.charging.sell { box-shadow: var(--neon-glow-pink), 0 0 40px rgba(255, 46, 136, 0.5); }
+[data-theme="neon"] .t-lev { font-family: "Orbitron"; }
+[data-theme="neon"] .lev-big { font-family: "Orbitron"; text-shadow: 0 0 18px rgba(238, 242, 255, 0.5); }
+[data-theme="neon"] .lev-big.danger { text-shadow: var(--neon-glow-pink); }
+[data-theme="neon"] .btn-close { text-shadow: 0 0 10px rgba(255, 46, 136, 0.6); }
+
+/* ═══════════ Buff 卡牌：全息卡 ═══════════ */
+[data-theme="neon"] .buff-card {
+  background:
+    linear-gradient(168deg, rgba(34, 28, 74, 0.9), rgba(10, 9, 24, 0.94));
+  backdrop-filter: blur(4px);
+}
+[data-theme="neon"] .buff-card::before {
+  /* 全息斜纹 */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(115deg, transparent 0 10px, rgba(120, 200, 255, 0.028) 10px 12px);
+}
+[data-theme="neon"] .buff-card.r2 { border-color: rgba(88, 166, 255, 0.55); box-shadow: 0 0 20px -4px rgba(88, 166, 255, 0.5); }
+[data-theme="neon"] .buff-card.r3 { border-color: rgba(199, 125, 255, 0.65); box-shadow: 0 0 26px -4px rgba(199, 125, 255, 0.65); }
+[data-theme="neon"] .buff-card.r4 {
+  border-color: rgba(255, 209, 102, 0.8);
+  box-shadow: 0 0 34px -4px rgba(255, 209, 102, 0.7), inset 0 0 30px rgba(255, 209, 102, 0.06);
+  animation: holoShift 3.4s linear infinite;
+}
+@keyframes holoShift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(14deg); }
+}
+[data-theme="neon"] .bc-emoji { filter: drop-shadow(0 0 12px currentColor); }
+[data-theme="neon"] .bc-name { font-family: "Noto Sans SC"; font-weight: 900; text-shadow: 0 0 16px currentColor; }
+[data-theme="neon"] .bc-pick {
+  background: rgba(124, 108, 255, 0.14);
+  border: 1px solid rgba(124, 168, 255, 0.35);
+  font-family: "Noto Sans SC"; letter-spacing: 4px;
+}
+[data-theme="neon"] .buff-card:hover .bc-pick { background: rgba(124, 108, 255, 0.3); box-shadow: var(--neon-glow-purple); }
+[data-theme="neon"] .btn-reroll { box-shadow: inset 0 0 16px rgba(34, 211, 238, 0.1); }
+[data-theme="neon"] .buff-head h2 { font-family: "Noto Sans SC"; font-weight: 900; text-shadow: 0 0 24px rgba(124, 108, 255, 0.7); }
+
+/* ═══════════ 监管电报：突袭广播 ═══════════ */
+[data-theme="neon"] .telegram {
+  background: #060610;
+  color: #dfe8ff;
+  border: 1px solid rgba(255, 46, 136, 0.65);
+  box-shadow: var(--neon-glow-pink), inset 0 0 60px rgba(255, 46, 136, 0.06), 0 30px 90px rgba(0, 0, 0, 0.85);
+  font-family: "Chakra Petch", "Noto Sans SC", monospace;
+}
+[data-theme="neon"] .telegram::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 3px);
+  animation: tgScan 8s linear infinite;
+}
+@keyframes tgScan { to { background-position: 0 120px; } }
+[data-theme="neon"] .tg-head { border-color: rgba(255, 46, 136, 0.7); color: var(--down); text-shadow: var(--neon-glow-pink); }
+[data-theme="neon"] .tg-kicker { color: var(--down); animation: liveBlink 0.9s infinite; letter-spacing: 8px; }
+[data-theme="neon"] .tg-title {
+  color: #fff;
+  text-shadow: 0 0 8px #fff, 0 0 24px var(--down), 0 0 60px var(--down);
+  animation: tgGlitch 2.8s infinite;
+}
+@keyframes tgGlitch {
+  0%, 100% { transform: translateX(0); }
+  92% { transform: translateX(0); }
+  93% { transform: translateX(-3px); text-shadow: 3px 0 var(--accent-2), -3px 0 var(--down); }
+  95% { transform: translateX(3px); }
+  96% { transform: translateX(0); }
+}
+[data-theme="neon"] .tg-stamp { border-color: var(--accent-2); color: var(--accent-2); box-shadow: var(--neon-glow-cyan); }
+[data-theme="neon"] .tg-ok { background: transparent; border: 1px solid var(--accent-2) !important; color: var(--accent-2); text-shadow: var(--neon-glow-cyan); }
+
+/* ═══════════ 剧情层 ═══════════ */
+[data-theme="neon"] .drama {
+  background: linear-gradient(170deg, rgba(24, 16, 48, 0.96), rgba(6, 5, 14, 0.98));
+  border: 1px solid rgba(124, 168, 255, 0.25);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8), inset 0 0 80px rgba(124, 108, 255, 0.05);
+}
+[data-theme="neon"] .drama-liq { border-color: rgba(255, 46, 136, 0.6); box-shadow: var(--neon-glow-pink), 0 30px 100px rgba(0, 0, 0, 0.8); }
+[data-theme="neon"] .drama-title { font-family: "Noto Sans SC"; font-weight: 900; }
+[data-theme="neon"] .drama-num { font-family: "Chakra Petch"; }
+
+/* ═══════════ 结算页 ═══════════ */
+[data-theme="neon"] .rb-final b { font-family: "Orbitron"; }
+[data-theme="neon"] .res-banner::after {
+  content: ""; position: absolute; left: 10%; right: 10%; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  box-shadow: var(--neon-glow-purple);
+}
+[data-theme="neon"] .reveal-card .rc-front {
+  border-color: rgba(255, 209, 102, 0.4);
+  box-shadow: 0 0 40px -8px rgba(255, 209, 102, 0.35);
+}
+[data-theme="neon"] .award-card { background: linear-gradient(160deg, rgba(30, 24, 64, 0.8), rgba(8, 8, 20, 0.9)); }
+[data-theme="neon"] .award-card.in { box-shadow: 0 0 24px -6px rgba(255, 209, 102, 0.5); border-color: rgba(255, 209, 102, 0.45); }
+[data-theme="neon"] .award-card b { text-shadow: 0 0 14px rgba(255, 209, 102, 0.8); }
+[data-theme="neon"] .pf-main b { font-family: "Orbitron"; text-shadow: var(--neon-glow-cyan); }
+[data-theme="neon"] .roast-card p { color: rgba(214, 224, 255, 0.85); }
+[data-theme="neon"] .curve-box { background: rgba(8, 8, 20, 0.6); }
+
+/* ═══════════ toast / flash ═══════════ */
+[data-theme="neon"] .toast {
+  background: rgba(10, 9, 26, 0.92);
+  border-color: rgba(124, 168, 255, 0.35);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+[data-theme="neon"] .rs-main.good { text-shadow: 0 0 40px rgba(34, 229, 138, 0.8); }
+[data-theme="neon"] .rs-main.bad { text-shadow: 0 0 40px rgba(255, 46, 136, 0.8); }
+
+/* 选中文字 */
+[data-theme="neon"] ::selection { background: rgba(255, 46, 136, 0.4); }

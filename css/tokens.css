@@ -1,0 +1,178 @@
+/* ═══════════════════════════════════════════════════════════
+   《全仓以赴》 tokens.css — 全局设计令牌（v5）
+
+   三层结构，下层引用上层：
+   1. primitive  原始刻度（中性色阶 / 字阶 / 间距 / 圆角 / 动效 / 材质）
+   2. semantic   语义别名（--bg/--ink/--up… 契约变量的默认值，主题只覆盖这一层）
+   3. component  组件级复合令牌（按钮/面板/芯片的材质配方）
+
+   质感原则（去 AI 味）：
+   - 不用纯黑纯白：最深 #07070c、最亮 #f4f4f8，暗部带一点蓝紫
+   - 层级靠「材质」不靠「光晕」：1px 发丝线 + 顶部内高光 + 分级投影
+   - 动效时长有节奏：120/200/320/480 四档，缓动只用三条曲线
+   - 禁止在令牌层出现：彩色外发光、无限扫光、紫粉渐变
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── 1a. 中性色阶（暗色优先，冷调） ─────────────────── */
+  --n-000: #07070c;   /* 最深底：页面外围 */
+  --n-050: #0b0b14;   /* 应用底色 */
+  --n-100: #12121f;   /* 次级底 */
+  --n-150: #181828;   /* 面板 */
+  --n-200: #1f1f33;   /* 浮起面板 */
+  --n-300: #2a2a42;   /* 分隔/描边加重 */
+  --n-400: #3d3d5c;   /* 禁用态文字 */
+  --n-500: #6a6a8a;   /* 弱文字 */
+  --n-600: #9a9ab4;   /* 次级文字 */
+  --n-700: #c4c4d6;   /* 正文 */
+  --n-800: #e6e6f0;   /* 强调正文 */
+  --n-900: #f2f2f8;   /* 最亮（非纯白） */
+
+  /* 白色低透明度阶梯：面板/发丝线的统一配方 */
+  --w-03: rgba(255, 255, 255, 0.03);
+  --w-05: rgba(255, 255, 255, 0.05);
+  --w-08: rgba(255, 255, 255, 0.08);
+  --w-12: rgba(255, 255, 255, 0.12);
+  --w-18: rgba(255, 255, 255, 0.18);
+  --b-40: rgba(0, 0, 0, 0.40);
+  --b-55: rgba(0, 0, 0, 0.55);
+
+  /* ── 1b. 功能色（涨跌/金币/警示 — 主题可覆盖同名语义变量） ── */
+  --c-up: #22e58a;        /* 涨（霓虹夜基准） */
+  --c-up-ink: #04120a;    /* 涨色上的文字 */
+  --c-down: #ff4d6d;      /* 跌 */
+  --c-down-ink: #1c0209;
+  --c-gold: #ffd166;      /* 金钱/里程碑/暴击 */
+  --c-gold-deep: #e8b23c;
+  --c-warn: #ff9f43;      /* 警告/借贷 */
+  --c-accent: #7c6cff;    /* 主强调（默认=霓虹紫，主题必换） */
+  --c-accent-2: #22d3ee;  /* 次强调 */
+
+  /* 流派色（字印/槽位/卡框，全主题统一识别） */
+  --c-whale: #ff5c5c;
+  --c-seer: #b18aff;
+  --c-econ: #ffd166;
+  --c-wild: #66d9ff;
+
+  /* ── 1c. 字阶（px；小字号密集，游戏 HUD 特化） ───────── */
+  --fs-2xs: 9px;    /* 微型标签（手抖/pos-grid label） */
+  --fs-xs: 10.5px;  /* 芯片/角标 */
+  --fs-s: 12px;     /* 辅助正文 */
+  --fs-m: 13.5px;   /* 正文 */
+  --fs-l: 16px;     /* 小标题 */
+  --fs-xl: 20px;    /* 区块标题 */
+  --fs-2xl: 26px;   /* 大数字（身家/倍率） */
+  --fs-3xl: 34px;   /* 特大数字（结算/蓄力） */
+  --fs-hero: 44px;  /* 标题页 logo 级 */
+
+  /* 行高与字距：小字紧、标题松 */
+  --lh-tight: 1.2;
+  --lh-body: 1.5;
+  --ls-num: 0.5px;      /* 数字微松 */
+  --ls-label: 2px;      /* 全大写/中文标签 */
+  --ls-display: 6px;    /* 大标题 */
+
+  /* ── 1d. 间距（4px 基数） ───────────────────────────── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  /* ── 1e. 圆角（三档语义：小件/面板/大容器） ─────────── */
+  --r-xs: 4px;    /* 字印/微型芯片 */
+  --r-s: 8px;     /* 按钮/输入件 */
+  --r-m: 14px;    /* 卡片/面板 */
+  --r-l: 22px;    /* 弹层/大容器 */
+  --r-full: 999px;
+
+  /* ── 1f. 动效：四档时长 × 三条曲线 ──────────────────── */
+  --dur-1: 120ms;   /* 按压/即时反馈 */
+  --dur-2: 200ms;   /* 状态切换 */
+  --dur-3: 320ms;   /* 面板进出 */
+  --dur-4: 480ms;   /* 演出（发牌/飞卡） */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);     /* 默认：快进缓停 */
+  --ease-snap: cubic-bezier(0.34, 1.4, 0.64, 1);     /* 弹性落定（发牌/芯片，克制使用） */
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);      /* 位移演出 */
+
+  /* ── 1g. 材质：发丝线 / 内高光 / 分级投影 ─────────────
+     质感 = 材质分层，不是发光。禁止用 box-shadow 做彩色外光晕 */
+  --hairline: 1px solid var(--line);
+  --sheen: inset 0 1px 0 var(--w-18);        /* 顶部内高光：实体按键感 */
+  --sheen-soft: inset 0 1px 0 var(--w-08);
+  --press: inset 0 2px 6px var(--b-40);      /* 按压凹陷 */
+  --elev-1: 0 1px 2px rgba(0, 0, 0, 0.35);   /* 贴地小件 */
+  --elev-2: 0 2px 10px var(--b-40);           /* 按钮/浮起件 */
+  --elev-3: 0 8px 30px var(--b-55);           /* 面板/弹层 */
+  --elev-4: 0 30px 90px rgba(0, 0, 0, 0.8);  /* 应用容器（桌面） */
+
+  /* ── 1h. z-index 刻度 ───────────────────────────────── */
+  --z-chart: 1;
+  --z-hud: 5;
+  --z-dock: 10;
+  --z-fx: 50;
+  --z-overlay: 100;
+  --z-toast: 150;
+
+  /* ═══ 2. 语义层：契约变量默认值（主题文件覆盖的就是这层） ═══ */
+  --bg: var(--n-050);
+  --bg-2: var(--n-100);
+  --panel: rgba(255, 255, 255, 0.045);
+  --panel-2: var(--w-08);
+  --card: var(--w-05);
+  --line: var(--w-12);
+  --ink: var(--n-900);
+  --ink-dim: rgba(242, 242, 248, 0.62);
+  --ink-faint: rgba(242, 242, 248, 0.38);
+  --up: var(--c-up);
+  --down: var(--c-down);
+  --gold: var(--c-gold);
+  --accent: var(--c-accent);
+  --accent-2: var(--c-accent-2);
+  --warn: var(--c-warn);
+
+  --font-display: "Noto Sans SC", system-ui, sans-serif;
+  --font-body: "Noto Sans SC", system-ui, sans-serif;
+  --font-num: ui-monospace, "SF Mono", "Chakra Petch", monospace;
+
+  --radius-s: var(--r-s);
+  --radius-m: var(--r-m);
+  --radius-l: var(--r-l);
+
+  --dock-h: 148px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+/* ═══ 3. 组件级复合令牌（主题可按 [data-theme] 覆盖任意一条） ═══ */
+:root {
+  /* 主按钮材质：实色 + 顶部内高光 + 深色投影（v4 反 AI 三件套的正面配方） */
+  --btn-primary-bg: var(--accent);
+  --btn-primary-ink: #fff;
+  --btn-primary-shadow: var(--sheen), var(--elev-2);
+  --btn-primary-shadow-active: var(--press);
+
+  /* 面板材质：低透白 + 发丝线 */
+  --panel-bg: var(--panel);
+  --panel-border: var(--hairline);
+
+  /* 字印（glyph seal）：描边方章，全主题统一识别 */
+  --seal-border: 1px solid currentColor;
+  --seal-radius: var(--r-xs);
+
+  /* 涨跌色上的前景 */
+  --on-up: var(--c-up-ink);
+  --on-down: var(--c-down-ink);
+}
+
+/* 减少动态偏好：全局降级为无动画（令牌层统一处理，主题无需各自实现） */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 0ms;
+    --dur-2: 0ms;
+    --dur-3: 0ms;
+    --dur-4: 0ms;
+  }
+}
