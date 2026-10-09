@@ -1,0 +1,405 @@
+/* ═══════════════════════════════════════════════════════════
+   主题 4/5 · 波普拼贴 STICKER POP
+   奶油纸 / 黑描边 / 硬偏移阴影 / 网点 / 贴纸弹跳
+   ═══════════════════════════════════════════════════════════ */
+
+:root, [data-theme="pop"] {
+  --bg: #fff6df;
+  --bg-2: #ffefc9;
+  --panel: rgba(255, 255, 255, 0.72);
+  --panel-2: rgba(25, 25, 25, 0.07);
+  --card: #ffffff;
+  --line: #191919;
+  --ink: #191919;
+  --ink-dim: rgba(25, 25, 25, 0.68);
+  --ink-faint: rgba(25, 25, 25, 0.42);
+  --up: #0ca95a;
+  --down: #ff4757;
+  --gold: #ffb703;
+  --accent: #2667ff;
+  --accent-2: #ff7b00;
+  --warn: #ff7b00;
+
+  --font-display: "Fredoka", "ZCOOL KuaiLe", sans-serif;
+  --font-body: "ZCOOL KuaiLe", "Fredoka", sans-serif;
+  --font-num: "Fredoka", sans-serif;
+
+  --radius-s: 10px;
+  --radius-m: 16px;
+  --radius-l: 24px;
+
+  --pop-shadow: 4px 4px 0 #191919;
+  --pop-shadow-sm: 3px 3px 0 #191919;
+
+  /* ── v5 令牌化：本主题局部令牌（一次定义，全文引用） ── */
+  --pop-ink: #191919;
+  --pop-ink-rgb: 25, 25, 25;
+  --pop-down-rgb: 255, 71, 87;
+  --pop-up-rgb: 12, 169, 90;
+  --pop-white: #fff;
+  --pop-gold-soft: #ffe08a;
+  --pop-green-deep: #087a41;
+  --pop-cream: #fff3bf;
+  --pop-red-deep: #c22331;
+  --pop-r-6: 6px;
+  --pop-r-12: 12px;
+  --pop-r-18: 18px;
+}
+
+/* 奶油纸 + 网点 */
+[data-theme="pop"] #app {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(var(--pop-down-rgb), 0.10), transparent 34%),
+    radial-gradient(circle at 88% 14%, rgba(38, 103, 255, 0.10), transparent 36%),
+    radial-gradient(circle at 50% 96%, rgba(var(--pop-up-rgb), 0.10), transparent 40%),
+    radial-gradient(rgba(var(--pop-ink-rgb), 0.055) 1px, transparent 1.4px),
+    var(--bg);
+  background-size: auto, auto, auto, 7px 7px, auto;
+}
+
+/* ═══════════ 标题页 ═══════════ */
+.pop-logo { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.pl-title { display: flex; gap: 4px; }
+.pl-title b {
+  font-family: "ZCOOL KuaiLe", sans-serif;
+  font-size: 56px; line-height: 1;
+  color: var(--pop-white);
+  -webkit-text-stroke: 3px var(--pop-ink);
+  paint-order: stroke fill;
+  text-shadow: 5px 5px 0 var(--pop-ink);
+  animation: popBob 2.6s ease-in-out infinite;
+}
+.pl-title b:nth-child(1) { background: var(--down); border-radius: 14px 4px 12px 6px; transform: rotate(-4deg); padding: 4px 8px; }
+.pl-title b:nth-child(2) { background: var(--accent); border-radius: 6px 14px 5px 12px; transform: rotate(3deg); padding: 4px 8px; animation-delay: 0.2s; }
+.pl-title b:nth-child(3) { background: var(--up); border-radius: 12px 6px 14px 5px; transform: rotate(-2deg); padding: 4px 8px; animation-delay: 0.4s; }
+.pl-title b:nth-child(4) { background: var(--gold); border-radius: 5px 12px 6px 14px; transform: rotate(4deg); padding: 4px 8px; animation-delay: 0.6s; }
+@keyframes popBob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+.pl-bam {
+  position: absolute; right: -46px; top: -14px;
+  background: var(--gold); color: var(--pop-ink);
+  border: 3px solid var(--pop-ink); border-radius: 50%;
+  width: 54px; height: 54px;
+  display: grid; place-items: center;
+  font-family: Fredoka; font-weight: 700; font-size: 17px;
+  transform: rotate(12deg);
+  box-shadow: var(--pop-shadow-sm);
+  animation: bamSpin 5s ease-in-out infinite;
+}
+@keyframes bamSpin { 0%, 100% { transform: rotate(12deg) scale(1); } 50% { transform: rotate(4deg) scale(1.12); } }
+.pl-sub { font-family: Fredoka; font-size: 11px; letter-spacing: 3px; color: rgba(var(--pop-ink-rgb), 0.6); }
+
+[data-theme="pop"] .tagline { color: rgba(var(--pop-ink-rgb), 0.72); }
+[data-theme="pop"] .picker-label { color: var(--pop-ink); font-family: "ZCOOL KuaiLe"; letter-spacing: 6px; }
+[data-theme="pop"] .picker-label::before, [data-theme="pop"] .picker-label::after { background: repeating-linear-gradient(90deg, var(--pop-ink) 0 6px, transparent 6px 10px); height: 2px; }
+
+/* 主题卡 = 贴纸 */
+[data-theme="pop"] .theme-card {
+  background: var(--pop-white);
+  border: 3px solid var(--pop-ink);
+  box-shadow: var(--pop-shadow);
+  transform: rotate(-1.2deg);
+}
+[data-theme="pop"] .theme-card:nth-child(2n) { transform: rotate(1.4deg); }
+[data-theme="pop"] .theme-card.sel {
+  border-color: var(--pop-ink);
+  box-shadow: var(--pop-shadow), 0 0 0 4px var(--gold);
+  transform: rotate(0deg) scale(1.03);
+}
+[data-theme="pop"] .tc-preview { border-bottom: 3px solid var(--pop-ink); }
+[data-theme="pop"] .tc-name { font-family: "ZCOOL KuaiLe"; font-size: 17px; }
+[data-theme="pop"] .tc-check { background: var(--up); border: 2px solid var(--pop-ink); box-shadow: 2px 2px 0 var(--pop-ink); }
+
+/* 按钮 = 贴纸块 */
+[data-theme="pop"] .btn {
+  border: 3px solid var(--pop-ink);
+  border-radius: var(--r-m);
+  background: var(--pop-white);
+  color: var(--pop-ink);
+  box-shadow: var(--pop-shadow-sm);
+  font-family: "ZCOOL KuaiLe";
+  letter-spacing: 3px;
+}
+[data-theme="pop"] .btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--pop-ink); }
+[data-theme="pop"] .btn-primary {
+  background: var(--accent); color: var(--pop-ink);   /* v1.9.1 pop 的 accent=白：主按钮白字白底不可读 */
+  box-shadow: var(--pop-shadow);
+  animation: jelly 3.2s ease-in-out infinite;
+}
+[data-theme="pop"] .btn-primary:active { box-shadow: 0 0 0 var(--pop-ink); }
+[data-theme="pop"] .btn-ghost { background: var(--pop-white); }
+@keyframes jelly {
+  0%, 100% { transform: scale(1, 1); }
+  30% { transform: scale(1.04, 0.96); }
+  45% { transform: scale(0.97, 1.03); }
+  60% { transform: scale(1, 1); }
+}
+
+/* ═══════════ HUD ═══════════ */
+[data-theme="pop"] .round-num { font-family: Fredoka; color: var(--accent); }
+[data-theme="pop"] .hud-round label { font-family: "ZCOOL KuaiLe"; letter-spacing: 3px; color: rgba(var(--pop-ink-rgb), 0.6); }
+[data-theme="pop"] .equity { font-family: Fredoka; color: var(--pop-ink); }
+[data-theme="pop"] .equity.up { color: var(--up); }
+[data-theme="pop"] .equity.down { color: var(--down); }
+[data-theme="pop"] .pnl.up { color: var(--up); } [data-theme="pop"] .pnl.down { color: var(--down); }
+[data-theme="pop"] .icon-btn { border: 2.5px solid var(--pop-ink); background: var(--pop-white); box-shadow: 2px 2px 0 var(--pop-ink); border-radius: var(--radius-s); color: var(--pop-ink); }
+[data-theme="pop"] .tremor-bar { background: rgba(var(--pop-ink-rgb), 0.12); border: 2px solid var(--pop-ink); height: 8px; border-radius: var(--pop-r-6); }
+[data-theme="pop"] .tremor-bar i { border-radius: 4px; }
+
+/* ═══════════ 槽位 = 圆形贴纸 ═══════════ */
+[data-theme="pop"] .slot {
+  border: 2.5px dashed rgba(var(--pop-ink-rgb), 0.35);
+  border-radius: 50%;
+  background: var(--pop-white);
+}
+[data-theme="pop"] .slot.filled {
+  border-style: solid; border-color: var(--pop-ink);
+  box-shadow: 2px 2px 0 var(--pop-ink);
+  transform: rotate(-3deg);
+}
+[data-theme="pop"] .slot.filled:nth-child(2n) { transform: rotate(3deg); }
+[data-theme="pop"] .slot.filled.whale { background: #ffd7db; }
+[data-theme="pop"] .slot.filled.seer { background: #e4d4ff; }
+[data-theme="pop"] .slot.filled.econ { background: #ffefb8; }
+[data-theme="pop"] .slot.filled.wild { background: #c9f3ff; }
+[data-theme="pop"] .sp { background: var(--pop-white); border: 2px solid var(--pop-ink); color: var(--pop-ink); box-shadow: 2px 2px 0 var(--pop-ink); border-radius: var(--radius-s); }
+[data-theme="pop"] .sp.hidden-set { color: var(--accent-2); border-color: var(--accent-2); }
+
+/* ═══════════ 行情 = 漫画格 ═══════════ */
+[data-theme="pop"] #market {
+  border: 3px solid var(--pop-ink);
+  border-radius: var(--r-m);
+  background:
+    radial-gradient(rgba(var(--pop-ink-rgb), 0.05) 1px, transparent 1.4px) 0 0/8px 8px,
+    #fffdf4;
+  box-shadow: var(--pop-shadow);
+}
+[data-theme="pop"] #market::before {
+  content: "LIVE!! 神秘标的!!"; position: absolute; z-index: 2;
+  top: 8px; left: 50%; transform: translateX(-50%) rotate(-1deg);
+  font-family: "ZCOOL KuaiLe"; font-size: 10px; letter-spacing: 2px;
+  background: var(--gold); color: var(--pop-ink);
+  border: 2px solid var(--pop-ink); border-radius: var(--r-s);
+  padding: 2px 8px;
+  box-shadow: 2px 2px 0 var(--pop-ink);
+  pointer-events: none;
+  animation: popBob 2s ease-in-out infinite;
+}
+[data-theme="pop"] .pos-card {
+  background: var(--pop-white);
+  border: 3px solid var(--pop-ink);
+  border-radius: var(--pop-r-12);
+  box-shadow: var(--pop-shadow-sm);
+  transform: rotate(-0.6deg);
+}
+[data-theme="pop"] .pos-dir { border: 2px solid var(--pop-ink); border-radius: var(--r-s); font-family: "ZCOOL KuaiLe"; }
+[data-theme="pop"] .pos-dir.long { background: var(--up); color: var(--pop-white); }
+[data-theme="pop"] .pos-dir.short { background: var(--down); color: var(--pop-white); }
+[data-theme="pop"] .pos-grid b { color: var(--pop-ink); }
+[data-theme="pop"] #pos-upnl.good { color: var(--up); } [data-theme="pop"] #pos-upnl.bad { color: var(--down); }
+
+/* 情报 = 对话框 */
+[data-theme="pop"] .hint-chip {
+  background: var(--pop-white);
+  border: 2.5px solid var(--pop-ink);
+  border-left: 6px solid var(--accent);
+  border-radius: var(--pop-r-12);
+  box-shadow: var(--pop-shadow-sm);
+  transform: rotate(0.6deg);
+  position: relative;
+}
+[data-theme="pop"] .hint-chip::after {
+  content: ""; position: absolute; left: 18px; bottom: -8px;
+  width: 12px; height: 12px; background: var(--pop-white);
+  border-right: 2.5px solid var(--pop-ink); border-bottom: 2.5px solid var(--pop-ink);
+  transform: skewX(-18deg) rotate(45deg);
+}
+[data-theme="pop"] .hint-chip b { font-family: "ZCOOL KuaiLe"; color: var(--pop-ink); }
+[data-theme="pop"] .hint-chip.good { border-left-color: var(--up); }
+[data-theme="pop"] .hint-chip.warn { border-left-color: var(--accent-2); }
+[data-theme="pop"] .hint-chip.magic { border-left-color: #9b5de5; }
+[data-theme="pop"] .hint-chip.gold { border-left-color: var(--gold); }
+[data-theme="pop"] .hint-chip.info { border-left-color: var(--accent); }
+
+/* ═══════════ 排名 ═══════════ */
+[data-theme="pop"] .rank-row {
+  background: var(--pop-white);
+  border: 2.5px solid var(--pop-ink);
+  border-radius: var(--pop-r-12);
+  box-shadow: 2px 2px 0 rgba(var(--pop-ink-rgb), 0.85);
+}
+[data-theme="pop"] .rank-row.you { background: var(--pop-cream); border-color: var(--pop-ink); box-shadow: 3px 3px 0 var(--gold); }
+[data-theme="pop"] .rank-row .nm { font-family: "ZCOOL KuaiLe"; }
+[data-theme="pop"] .rank-row.leader .rk { color: var(--accent-2); }
+
+/* ═══════════ 操作坞 ═══════════ */
+[data-theme="pop"] .trade-btn {
+  border: 3px solid var(--pop-ink);
+  border-radius: var(--pop-r-18);
+  box-shadow: var(--pop-shadow);
+}
+[data-theme="pop"] .trade-btn.buy { background: #b8f0d2; color: var(--pop-green-deep); }
+[data-theme="pop"] .trade-btn.sell { background: #ffd3d8; color: var(--pop-red-deep); }
+[data-theme="pop"] .trade-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--pop-ink); }
+[data-theme="pop"] .trade-btn .t-lev { font-family: Fredoka; }
+[data-theme="pop"] .trade-btn .t-label { font-family: "ZCOOL KuaiLe"; font-size: 17px; letter-spacing: 5px; }
+[data-theme="pop"] .lev-big { font-family: Fredoka; color: var(--pop-ink); }
+[data-theme="pop"] .lev-big.danger { color: var(--down); }
+[data-theme="pop"] .lev-track { background: rgba(var(--pop-ink-rgb), 0.15); border: 2px solid var(--pop-ink); height: 8px; border-radius: var(--pop-r-6); }
+[data-theme="pop"] .lev-track i { background: var(--pop-ink); border-radius: 2px; }
+[data-theme="pop"] .btn-close { background: #ffd3d8; color: var(--pop-red-deep); border-color: var(--pop-ink); }
+[data-theme="pop"] .btn-hold { background: var(--pop-white); }
+
+/* ═══════════ Buff 卡 = 歪贴纸 ═══════════ */
+[data-theme="pop"] .buff-card {
+  background: var(--pop-white);
+  border: 3px solid var(--pop-ink);
+  border-radius: var(--radius-m);
+  box-shadow: var(--pop-shadow);
+  transform: rotate(-1.6deg);
+  color: var(--pop-ink);
+}
+[data-theme="pop"] .buff-card:nth-child(2) { transform: rotate(1.8deg); }
+[data-theme="pop"] .buff-card:nth-child(3) { transform: rotate(-0.8deg); }
+[data-theme="pop"] .buff-card::after {
+  /* 胶带 */
+  content: ""; position: absolute; top: -10px; left: 50%;
+  width: 62px; height: 18px;
+  background: rgba(255, 183, 3, 0.75);
+  border: 1.5px solid rgba(var(--pop-ink-rgb), 0.25);
+  transform: translateX(-50%) rotate(-3deg);
+}
+[data-theme="pop"] .buff-card:active { transform: rotate(0deg) scale(0.96); }
+[data-theme="pop"] .buff-card .bc-glow { display: none; }
+[data-theme="pop"] .bc-school { color: rgba(var(--pop-ink-rgb), 0.55); font-family: "ZCOOL KuaiLe"; letter-spacing: 3px; }
+[data-theme="pop"] .buff-card.r1 { color: var(--pop-ink); }
+[data-theme="pop"] .buff-card.r2 { color: var(--accent); border-color: var(--pop-ink); background: #eaf1ff; }
+[data-theme="pop"] .buff-card.r3 { color: #9b5de5; background: #f3ebff; box-shadow: var(--pop-shadow), 0 0 0 3px rgba(155, 93, 229, 0.35); }
+[data-theme="pop"] .buff-card.r4 { color: var(--accent-2); background: var(--pop-cream); box-shadow: var(--pop-shadow), 0 0 0 4px var(--gold); animation: jelly 2.4s infinite; }
+[data-theme="pop"] .bc-rarity { font-family: Fredoka; }
+[data-theme="pop"] .bc-name { font-family: "ZCOOL KuaiLe"; font-size: 17px; color: var(--pop-ink); }
+[data-theme="pop"] .bc-desc { color: rgba(var(--pop-ink-rgb), 0.75); }
+[data-theme="pop"] .bc-own { color: var(--accent-2); }
+[data-theme="pop"] .bc-lock { background: var(--pop-white); border: 2px solid var(--pop-ink); border-radius: var(--r-s); box-shadow: 2px 2px 0 var(--pop-ink); }
+[data-theme="pop"] .bc-lock.on { background: var(--gold); }
+[data-theme="pop"] .bc-pick {
+  background: var(--pop-gold-soft); border: 2.5px solid var(--pop-ink); border-radius: var(--radius-s);
+  box-shadow: 2px 2px 0 var(--pop-ink);
+  font-family: "ZCOOL KuaiLe"; font-size: 15px; letter-spacing: 4px; color: var(--pop-ink);
+}
+[data-theme="pop"] .buff-card:hover .bc-pick { background: var(--up); color: var(--pop-white); }
+[data-theme="pop"] .buff-head h2 { font-family: "ZCOOL KuaiLe"; font-size: 24px; letter-spacing: 5px; color: var(--pop-ink); }
+[data-theme="pop"] .buff-cash { color: var(--pop-green-deep); }
+[data-theme="pop"] .btn-reroll { background: #c9f3ff; color: var(--pop-ink); border-color: var(--pop-ink); box-shadow: var(--pop-shadow-sm); }
+[data-theme="pop"] .btn-reroll.free { background: var(--gold); }
+
+/* ═══════════ 电报 = 漫画分镜 ═══════════ */
+[data-theme="pop"] .telegram {
+  background:
+    repeating-conic-gradient(from 0deg at 50% 32%, rgba(var(--pop-ink-rgb), 0.05) 0deg 4deg, transparent 4deg 8deg),
+    var(--pop-white);
+  color: var(--pop-ink);
+  border: 4px solid var(--pop-ink);
+  border-radius: var(--pop-r-6);
+  box-shadow: 8px 8px 0 rgba(var(--pop-ink-rgb), 0.85);
+  font-family: "ZCOOL KuaiLe", sans-serif;
+}
+[data-theme="pop"] .tg-head { border-color: var(--pop-ink); color: var(--down); font-family: Fredoka; }
+[data-theme="pop"] .tg-kicker { color: var(--down); letter-spacing: 4px; animation: popBob 0.8s infinite; }
+[data-theme="pop"] .tg-title {
+  font-family: "ZCOOL KuaiLe"; font-size: 30px; color: var(--pop-white);
+  -webkit-text-stroke: 2.5px var(--pop-ink); paint-order: stroke fill;
+  text-shadow: 4px 4px 0 var(--pop-ink);
+}
+[data-theme="pop"] .tg-body { font-size: 13px; }
+[data-theme="pop"] .tg-stamp {
+  border: 4px solid var(--down); color: var(--down);
+  border-radius: var(--pop-r-12); font-family: "ZCOOL KuaiLe"; font-size: 20px;
+  transform: rotate(-14deg) scale(3);
+}
+[data-theme="pop"] .telegram.stamped .tg-stamp { transform: rotate(-14deg) scale(1); }
+[data-theme="pop"] .tg-ok { background: var(--accent); color: var(--pop-white); border: 3px solid var(--pop-ink) !important; box-shadow: var(--pop-shadow-sm); font-family: "ZCOOL KuaiLe"; }
+
+/* ═══════════ 剧情 = KO 分镜 ═══════════ */
+[data-theme="pop"] .drama {
+  background:
+    repeating-conic-gradient(from 8deg at 50% 42%, var(--pop-gold-soft) 0deg 9deg, var(--pop-white) 9deg 18deg);
+  border: 4px solid var(--pop-ink);
+  border-radius: var(--pop-r-18);
+  box-shadow: 8px 8px 0 rgba(var(--pop-ink-rgb), 0.85);
+}
+[data-theme="pop"] .drama-title {
+  font-family: "ZCOOL KuaiLe"; color: var(--pop-white);
+  -webkit-text-stroke: 2.5px var(--pop-ink); paint-order: stroke fill;
+  text-shadow: 5px 5px 0 var(--pop-ink);
+}
+[data-theme="pop"] .drama-liq .drama-title { color: var(--down); }
+[data-theme="pop"] .drama-body { color: rgba(var(--pop-ink-rgb), 0.8); background: rgba(255, 255, 255, 0.75); border-radius: var(--radius-s); padding: 8px; }
+[data-theme="pop"] .drama-num { color: var(--pop-ink); background: var(--pop-white); border: 2.5px solid var(--pop-ink); border-radius: var(--radius-s); display: inline-block; padding: 4px 12px; box-shadow: 2px 2px 0 var(--pop-ink); }
+[data-theme="pop"] .drama-ok { background: var(--up); color: var(--pop-white); border: 3px solid var(--pop-ink); box-shadow: var(--pop-shadow-sm); font-family: "ZCOOL KuaiLe"; }
+
+/* ═══════════ 结算 = 贴纸册 ═══════════ */
+[data-theme="pop"] .rb-kicker { font-family: "ZCOOL KuaiLe"; letter-spacing: 4px; color: rgba(var(--pop-ink-rgb), 0.65); }
+[data-theme="pop"] .rb-line b { color: var(--pop-ink); }
+[data-theme="pop"] .res-banner.win .rb-final b { color: var(--up); text-shadow: 4px 4px 0 rgba(var(--pop-up-rgb), 0.25); }
+[data-theme="pop"] .res-banner.lose .rb-final b { color: var(--down); text-shadow: 4px 4px 0 rgba(var(--pop-down-rgb), 0.25); }
+[data-theme="pop"] .rb-mult { border: 3px solid var(--pop-ink) !important; box-shadow: 2px 2px 0 var(--pop-ink); color: var(--pop-ink) !important; background: var(--pop-gold-soft); }
+[data-theme="pop"] .rs-title { font-family: "ZCOOL KuaiLe"; color: var(--pop-ink); letter-spacing: 4px; }
+[data-theme="pop"] .rs-title::after { background: repeating-linear-gradient(90deg, var(--pop-ink) 0 8px, transparent 8px 12px); height: 2px; }
+[data-theme="pop"] .curve-box { background: #fffdf4; border: 3px solid var(--pop-ink); box-shadow: var(--pop-shadow-sm); border-radius: var(--r-m); }
+[data-theme="pop"] .reveal-card .rc-back { background: repeating-linear-gradient(45deg, var(--pop-gold-soft), var(--pop-gold-soft) 12px, var(--pop-white) 12px, var(--pop-white) 24px); border: 3px solid var(--pop-ink); }
+[data-theme="pop"] .rc-q { color: var(--pop-ink); -webkit-text-stroke: 2px var(--pop-ink); }
+[data-theme="pop"] .reveal-card .rc-front { background: var(--pop-white); border: 3px solid var(--pop-ink); box-shadow: var(--pop-shadow-sm); }
+[data-theme="pop"] .rc-kicker { color: var(--accent-2); }
+[data-theme="pop"] .rc-front h3 { font-family: "ZCOOL KuaiLe"; }
+[data-theme="pop"] .rc-verdict { color: var(--accent); }
+[data-theme="pop"] .award-card { background: var(--pop-white); border: 3px solid var(--pop-ink); box-shadow: var(--pop-shadow-sm); border-radius: var(--r-m); }
+[data-theme="pop"] .award-card.in { transform: rotate(-1.5deg); }
+[data-theme="pop"] .award-card.in:nth-child(2n) { transform: rotate(1.5deg); }
+[data-theme="pop"] .award-card b { color: var(--accent-2); font-family: "ZCOOL KuaiLe"; letter-spacing: 2px; }
+[data-theme="pop"] .profile-card { background: var(--pop-white); border: 3px solid var(--pop-ink); box-shadow: var(--pop-shadow); border-radius: var(--radius-m); }
+[data-theme="pop"] .pf-main b { color: var(--accent); }
+[data-theme="pop"] .pf-main span { font-family: "ZCOOL KuaiLe"; }
+[data-theme="pop"] .pf-bar i { background: repeating-linear-gradient(45deg, var(--accent) 0 6px, #4d86ff 6px 12px); border: 1.5px solid var(--pop-ink); }
+[data-theme="pop"] .pf-figure b { color: var(--accent-2); font-family: "ZCOOL KuaiLe"; }
+[data-theme="pop"] .roast-card { background: var(--pop-white); border: 3px solid var(--pop-ink); box-shadow: var(--pop-shadow-sm); border-radius: var(--radius-m); position: relative; }
+[data-theme="pop"] .roast-card::after {
+  content: ""; position: absolute; left: 34px; bottom: -10px;
+  width: 16px; height: 16px; background: var(--pop-white);
+  border-right: 3px solid var(--pop-ink); border-bottom: 3px solid var(--pop-ink);
+  transform: rotate(45deg) skewX(-12deg);
+}
+[data-theme="pop"] .roast-card p { color: rgba(var(--pop-ink-rgb), 0.85); }
+[data-theme="pop"] .fs-row { background: var(--pop-white); border: 2.5px solid var(--pop-ink); box-shadow: 2px 2px 0 rgba(var(--pop-ink-rgb), 0.8); border-radius: var(--pop-r-12); }
+[data-theme="pop"] .fs-row.you { background: var(--pop-cream); }
+[data-theme="pop"] .fs-nm { font-family: "ZCOOL KuaiLe"; }
+[data-theme="pop"] .fs-eq.good { color: var(--up); } [data-theme="pop"] .fs-eq.bad { color: var(--down); }
+[data-theme="pop"] .br-chip { background: var(--pop-white); border: 2px solid var(--pop-ink); box-shadow: 2px 2px 0 var(--pop-ink); }
+[data-theme="pop"] .br-sets { color: var(--accent-2); }
+
+/* toast / flash */
+[data-theme="pop"] .toast { background: var(--pop-white); border: 2.5px solid var(--pop-ink); box-shadow: var(--pop-shadow-sm); color: var(--pop-ink); border-radius: var(--r-m); }
+[data-theme="pop"] .toast.good { color: var(--pop-green-deep); border-color: var(--up); }
+[data-theme="pop"] .toast.bad { color: var(--pop-red-deep); border-color: var(--down); }
+[data-theme="pop"] .toast.gold { color: #b25b00; border-color: var(--gold); box-shadow: 3px 3px 0 var(--gold); }
+[data-theme="pop"] .rs-main.good { color: var(--up); text-shadow: 4px 4px 0 var(--pop-ink); }
+[data-theme="pop"] .rs-main.bad { color: var(--down); text-shadow: 4px 4px 0 var(--pop-ink); }
+[data-theme="pop"] .rs-sub { color: var(--pop-ink); text-shadow: none; background: rgba(255, 255, 255, 0.8); border-radius: var(--r-s); display: inline-block; padding: 2px 8px; }
+[data-theme="pop"] .rs-notes i { background: var(--pop-white); border: 2px solid var(--pop-ink); color: var(--pop-ink); }
+[data-theme="pop"] .rs-notes i.good { color: var(--pop-green-deep); border-color: var(--up); }
+[data-theme="pop"] .center-flash b { font-family: "ZCOOL KuaiLe"; -webkit-text-stroke: 2px var(--pop-ink); paint-order: stroke fill; text-shadow: 4px 4px 0 var(--pop-ink); }
+[data-theme="pop"] .center-flash.long b { color: var(--up); }
+[data-theme="pop"] .center-flash.short b { color: var(--down); }
+
+[data-theme="pop"] .overlay { background: rgba(255, 246, 223, 0.86); backdrop-filter: blur(5px); }
+[data-theme="pop"] .help-panel { background: var(--pop-white); border: 4px solid var(--pop-ink); box-shadow: 8px 8px 0 rgba(var(--pop-ink-rgb), 0.85); }
+[data-theme="pop"] .help-scroll h2 { font-family: "ZCOOL KuaiLe"; }
+[data-theme="pop"] .pause-panel h2 { font-family: "ZCOOL KuaiLe"; }
+[data-theme="pop"] .pause-panel .btn { background: var(--pop-white); }
+
+[data-theme="pop"] ::selection { background: var(--pop-gold-soft); }
+
+/* ═══ v4 去AI味例外：pop = 贴纸玩具美学，唯一保留 emoji 卡面的主题 ═══ */
+[data-theme="pop"] .bc-emoji { display: block; font-size: 34px; filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25)); }
+[data-theme="pop"] .bc-glyph { display: none; }
+[data-theme="pop"] .slot .sl-icon { display: block; font-size: 19px; line-height: 1; }
+[data-theme="pop"] .slot .sl-glyph { display: none; }
