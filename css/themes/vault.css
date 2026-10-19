@@ -1,0 +1,415 @@
+/* ═══════════════════════════════════════════════════════════
+   主题 5/5 · 老钱私行 PRIVATE VAULT
+   Racing Green 皮革 / 烫金 hairline / 奶油证书 / 火漆压印
+   签名动作：火漆（scale 3→1 慢沉）
+   ═══════════════════════════════════════════════════════════ */
+
+:root, [data-theme="vault"] {
+  --bg: #10241b;
+  --bg-2: #0b1b14;
+  --panel: rgba(240, 232, 210, 0.05);
+  --panel-2: rgba(240, 232, 210, 0.09);
+  --card: #f4ecd9;
+  --line: rgba(212, 175, 55, 0.32);
+  --ink: #f0e8d2;
+  --ink-dim: rgba(240, 232, 210, 0.66);
+  --ink-faint: rgba(240, 232, 210, 0.40);
+  --up: #c9a227;
+  --down: #a24444;
+  --gold: #d4af37;
+  --accent: #d4af37;
+  --accent-2: #9db8a4;
+  --warn: #c98a3d;
+
+  --font-display: "Cormorant Garamond", "Noto Serif SC", serif;
+  --font-body: "Noto Serif SC", "Cormorant Garamond", serif;
+  --font-num: "Cormorant Garamond", serif;
+
+  --radius-s: 2px;
+  --radius-m: 4px;
+  --radius-l: 8px;
+
+  /* ── v5 令牌化：本主题局部令牌（一次定义，全文引用） ── */
+  --vault-gold-rgb: 212, 175, 55;
+  --vault-ink-rgb: 240, 232, 210;
+  --vault-inkdark-rgb: 42, 36, 24;
+  --vault-down-rgb: 162, 68, 68;
+  --vault-gold-deep-rgb: 168, 132, 42;
+  --vault-brass-rgb: 90, 72, 34;
+  --vault-up-rgb: 201, 162, 39;
+  --vault-gold-soft: #e8cf7a;
+  --vault-rose: #d98c8c;
+  --vault-gold-deep: #a8842a;
+  --vault-ink-deep: #241f12;
+  --vault-green-deep: #14261c;
+  --vault-gold-hi: #ffe9a8;
+  --vault-gold-shadow: #8a6a1c;
+  --vault-paper: #f2ead6;
+  --vault-r-3: 3px;
+  --vault-r-1: 1px;
+}
+
+/* 皮革：细纹 + 缝线暗角 */
+[data-theme="vault"] #app {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(var(--vault-gold-rgb), 0.06), transparent 55%),
+    repeating-radial-gradient(circle at 30% 20%, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0 2px, transparent 2px 4px),
+    linear-gradient(180deg, #142c21, var(--bg-2) 70%);
+}
+[data-theme="vault"] #app::after {
+  content: ""; position: absolute; inset: 0; z-index: 60; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(var(--vault-gold-rgb), 0.12), inset 0 0 90px rgba(0, 0, 0, 0.55);
+}
+
+/* ═══════════ 标题页 ═══════════ */
+.vault-logo { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.vl-crest {
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  box-shadow: 0 0 0 3px rgba(var(--vault-gold-rgb), 0.15), inset 0 0 0 1.5px rgba(var(--vault-gold-rgb), 0.6);
+  display: grid; place-items: center;
+  position: relative;
+}
+.vl-crest span {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px; font-weight: 700; letter-spacing: 2px;
+  color: var(--gold);
+}
+.vl-crest::after {
+  content: ""; position: absolute; inset: -7px; border-radius: 50%;
+  border: 1px dashed rgba(var(--vault-gold-rgb), 0.35);
+}
+.vl-title {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 900; font-size: 42px; letter-spacing: 14px; margin-left: 14px;
+  color: #f6efdc;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 0 26px rgba(var(--vault-gold-rgb), 0.25);
+}
+.vl-rule { display: flex; align-items: center; gap: 12px; width: 70%; }
+.vl-rule i { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.vl-rule i:last-child { background: linear-gradient(90deg, var(--gold), transparent); }
+.vl-rule b {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 10px; letter-spacing: 4px; color: var(--gold); font-weight: 600;
+}
+.vl-sub { font-family: "Cormorant Garamond", serif; font-size: 11px; letter-spacing: 5px; color: rgba(var(--vault-ink-rgb), 0.55); font-style: italic; }
+
+[data-theme="vault"] .tagline { color: rgba(var(--vault-ink-rgb), 0.7); font-style: italic; }
+[data-theme="vault"] .picker-label { color: var(--gold); font-family: "Cormorant Garamond"; letter-spacing: 6px; }
+[data-theme="vault"] .picker-label::before, [data-theme="vault"] .picker-label::after { background: linear-gradient(90deg, transparent, rgba(var(--vault-gold-rgb), 0.5), transparent); }
+
+/* 主题卡 = 会员证 */
+[data-theme="vault"] .theme-card {
+  background: linear-gradient(165deg, #17352a, #0d2018);
+  border: 1px solid rgba(var(--vault-gold-rgb), 0.35);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+[data-theme="vault"] .theme-card.sel {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold), 0 0 30px rgba(var(--vault-gold-rgb), 0.25), inset 0 0 24px rgba(var(--vault-gold-rgb), 0.08);
+}
+[data-theme="vault"] .tc-preview { border-bottom: 1px solid rgba(var(--vault-gold-rgb), 0.3); }
+[data-theme="vault"] .tc-name { font-family: "Noto Serif SC"; font-weight: 700; letter-spacing: 2px; }
+[data-theme="vault"] .tc-check { background: var(--gold); color: var(--vault-green-deep); }
+
+/* 按钮 */
+[data-theme="vault"] .btn {
+  border: 1px solid rgba(var(--vault-gold-rgb), 0.5);
+  border-radius: var(--radius-s);
+  background: rgba(var(--vault-ink-rgb), 0.04);
+  color: #ecdfc0;
+  font-family: "Noto Serif SC", serif;
+  letter-spacing: 4px;
+  position: relative;
+}
+[data-theme="vault"] .btn::after {
+  content: ""; position: absolute; inset: 3px;
+  border: 1px solid rgba(var(--vault-gold-rgb), 0.22);
+  pointer-events: none;
+}
+[data-theme="vault"] .btn-primary {
+  background: linear-gradient(160deg, var(--gold), var(--vault-gold-deep));
+  border-color: var(--vault-gold-soft);
+  color: var(--vault-green-deep);
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+[data-theme="vault"] .btn-primary::after { border-color: rgba(20, 38, 28, 0.35); }
+[data-theme="vault"] .btn-ghost { color: rgba(var(--vault-ink-rgb), 0.8); }
+
+/* ═══════════ HUD ═══════════ */
+[data-theme="vault"] #hud { border-bottom: 1px solid rgba(var(--vault-gold-rgb), 0.2); }
+[data-theme="vault"] .round-num { font-family: "Cormorant Garamond"; color: var(--gold); font-weight: 700; }
+[data-theme="vault"] .hud-round label { letter-spacing: 5px; color: rgba(var(--vault-ink-rgb), 0.5); }
+[data-theme="vault"] .equity { font-family: "Cormorant Garamond"; font-weight: 700; letter-spacing: 1px; }
+[data-theme="vault"] .equity.up { color: var(--vault-gold-soft); }
+[data-theme="vault"] .equity.down { color: var(--vault-rose); }
+[data-theme="vault"] .pnl.up { color: var(--vault-gold-soft); } [data-theme="vault"] .pnl.down { color: var(--vault-rose); }
+[data-theme="vault"] .icon-btn { border-color: rgba(var(--vault-gold-rgb), 0.4); color: var(--gold); border-radius: var(--radius-s); }
+[data-theme="vault"] .tremor-bar { background: rgba(var(--vault-ink-rgb), 0.08); border-radius: var(--vault-r-1); }
+[data-theme="vault"] .tremor-bar i { background: #9db8a4; border-radius: var(--vault-r-1); }
+[data-theme="vault"] .tremor-bar i[data-level="mid"] { background: #c98a3d; }
+[data-theme="vault"] .tremor-bar i[data-level="high"] { background: var(--down); }
+
+/* ═══════════ 槽位 = 烫金徽记 ═══════════ */
+[data-theme="vault"] .slot {
+  border: 1px dashed rgba(var(--vault-gold-rgb), 0.3);
+  border-radius: var(--vault-r-3);
+  background: rgba(0, 0, 0, 0.18);
+}
+[data-theme="vault"] .slot.filled {
+  border-style: solid; border-color: rgba(var(--vault-gold-rgb), 0.6);
+  background: linear-gradient(160deg, rgba(var(--vault-gold-rgb), 0.14), rgba(0, 0, 0, 0.25));
+  box-shadow: inset 0 0 12px rgba(var(--vault-gold-rgb), 0.1);
+}
+[data-theme="vault"] .slot.filled.whale { border-color: rgba(192, 85, 85, 0.7); }
+[data-theme="vault"] .slot.filled.seer { border-color: rgba(157, 184, 164, 0.7); }
+[data-theme="vault"] .slot.filled.econ { border-color: rgba(232, 207, 122, 0.8); }
+[data-theme="vault"] .slot.filled.wild { border-color: rgba(200, 200, 210, 0.6); }
+[data-theme="vault"] .sl-lvl { color: var(--vault-gold-soft); }
+[data-theme="vault"] .sp { background: rgba(0, 0, 0, 0.3); border-color: rgba(var(--vault-gold-rgb), 0.4); color: var(--gold); border-radius: var(--radius-s); }
+[data-theme="vault"] .sp.hidden-set { color: var(--vault-gold-hi); border-color: var(--vault-gold-soft); }
+
+/* ═══════════ 行情 = 账簿 ═══════════ */
+[data-theme="vault"] #market {
+  border: 1px solid rgba(var(--vault-gold-rgb), 0.35);
+  border-radius: var(--vault-r-3);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.45)),
+    #0e241b;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5), inset 0 0 50px rgba(0, 0, 0, 0.5);
+}
+[data-theme="vault"] #market::before {
+  content: "CONFIDENTIAL · 匿名标的"; position: absolute; z-index: 2;
+  top: 8px; left: 50%; transform: translateX(-50%);
+  font-family: "Cormorant Garamond", serif; font-size: 9px; letter-spacing: 4px;
+  color: rgba(var(--vault-gold-rgb), 0.55); font-style: italic;
+  pointer-events: none;
+}
+[data-theme="vault"] .pos-card {
+  background: rgba(10, 24, 18, 0.92);
+  border: 1px solid rgba(var(--vault-gold-rgb), 0.5);
+  border-radius: var(--vault-r-3);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
+}
+[data-theme="vault"] .pos-dir { border-radius: var(--radius-s); font-family: "Noto Serif SC"; font-weight: 900; }
+[data-theme="vault"] .pos-dir.long { background: var(--up); color: var(--vault-green-deep); }
+[data-theme="vault"] .pos-dir.short { background: #8f2d2d; color: #f4e8e0; }
+[data-theme="vault"] .pos-grid b { font-family: "Cormorant Garamond"; font-size: 12px; }
+[data-theme="vault"] #pos-upnl.good { color: var(--vault-gold-soft); } [data-theme="vault"] #pos-upnl.bad { color: var(--vault-rose); }
+[data-theme="vault"] .pos-liq .bad { color: var(--vault-rose); }
+
+/* 情报 = 便签 */
+[data-theme="vault"] .hint-chip {
+  background: rgba(244, 236, 217, 0.96);
+  border: none; border-left: 3px solid var(--vault-gold-deep);
+  border-radius: var(--radius-s);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  color: #2a2418;
+}
+[data-theme="vault"] .hint-chip b { color: #1d1a10; font-family: "Noto Serif SC"; }
+[data-theme="vault"] .hint-chip span { color: rgba(var(--vault-inkdark-rgb), 0.75); }
+[data-theme="vault"] .hint-chip.good { border-left-color: #6d7f3f; }
+[data-theme="vault"] .hint-chip.warn { border-left-color: #b0632a; }
+[data-theme="vault"] .hint-chip.magic { border-left-color: #5b4a86; }
+[data-theme="vault"] .hint-chip.gold { border-left-color: var(--vault-gold-deep); }
+[data-theme="vault"] .hint-chip.info { border-left-color: #31564b; }
+
+/* ═══════════ 排名 = 会员名录 ═══════════ */
+[data-theme="vault"] .rank-row {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(var(--vault-gold-rgb), 0.14);
+  border-radius: var(--radius-s);
+}
+[data-theme="vault"] .rank-row.you {
+  border-color: rgba(var(--vault-gold-rgb), 0.65);
+  background: linear-gradient(90deg, rgba(var(--vault-gold-rgb), 0.12), rgba(0, 0, 0, 0.2));
+  box-shadow: inset 2px 0 0 var(--gold);
+}
+[data-theme="vault"] .rank-row .nm { font-family: "Noto Serif SC"; font-weight: 700; }
+[data-theme="vault"] .rank-row .eq { font-family: "Cormorant Garamond"; font-size: 13px; }
+[data-theme="vault"] .rank-row.leader .rk { color: var(--gold); }
+
+/* ═══════════ 操作坞 ═══════════ */
+[data-theme="vault"] .trade-btn {
+  border: 1px solid rgba(var(--vault-gold-rgb), 0.45);
+  border-radius: var(--vault-r-3);
+  background: rgba(0, 0, 0, 0.28);
+}
+[data-theme="vault"] .trade-btn.buy { color: var(--vault-gold-soft); border-color: rgba(var(--vault-up-rgb), 0.65); }
+[data-theme="vault"] .trade-btn.sell { color: var(--vault-rose); border-color: rgba(var(--vault-down-rgb), 0.65); }
+[data-theme="vault"] .trade-btn .t-lev { font-family: "Cormorant Garamond"; font-weight: 700; }
+[data-theme="vault"] .trade-btn .t-label { font-family: "Noto Serif SC"; letter-spacing: 5px; font-size: 12px; }
+[data-theme="vault"] .trade-btn.charging { box-shadow: 0 0 0 1px currentColor, 0 0 24px -4px currentColor; }
+[data-theme="vault"] .lev-big { font-family: "Cormorant Garamond"; font-weight: 700; }
+[data-theme="vault"] .lev-big.danger { color: var(--vault-rose); }
+[data-theme="vault"] .lev-track { background: rgba(var(--vault-ink-rgb), 0.12); border-radius: var(--vault-r-1); }
+[data-theme="vault"] .lev-track i { background: var(--gold); }
+[data-theme="vault"] .lev-notch { background: rgba(var(--vault-gold-rgb), 0.4); }
+[data-theme="vault"] .btn-close { color: var(--vault-rose); border-color: rgba(var(--vault-down-rgb), 0.5); }
+[data-theme="vault"] .btn-hold { color: rgba(var(--vault-ink-rgb), 0.75); }
+
+/* ═══════════ Buff 卡 = 承议证书 ═══════════ */
+[data-theme="vault"] .buff-card {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(var(--vault-gold-deep-rgb), 0.08), transparent 55%),
+    linear-gradient(170deg, #f7f0de, #eadfc4);
+  border: 1px solid rgba(var(--vault-brass-rgb), 0.55);
+  border-radius: var(--vault-r-3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  color: #2a2418;
+  /* 齿孔边 */
+  mask-image:
+    radial-gradient(circle at 4px 50%, transparent 3px, #000 3.5px),
+    radial-gradient(circle at calc(100% - 4px) 50%, transparent 3px, #000 3.5px);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    radial-gradient(circle at 4px 50%, transparent 3px, #000 3.5px),
+    radial-gradient(circle at calc(100% - 4px) 50%, transparent 3px, #000 3.5px);
+  -webkit-mask-composite: source-in;
+}
+[data-theme="vault"] .buff-card .bc-glow { display: none; }
+[data-theme="vault"] .bc-school { color: rgba(var(--vault-inkdark-rgb), 0.6); font-family: "Cormorant Garamond"; letter-spacing: 3px; font-style: italic; }
+[data-theme="vault"] .bc-rarity { font-family: "Cormorant Garamond"; letter-spacing: 2px; }
+[data-theme="vault"] .buff-card.r1 { color: #6b5a3a; }
+[data-theme="vault"] .buff-card.r2 { color: #7d7d85; border-color: rgba(125, 125, 133, 0.8); }
+[data-theme="vault"] .buff-card.r3 { color: var(--vault-gold-deep); border-color: rgba(var(--vault-gold-deep-rgb), 0.9); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(var(--vault-gold-rgb), 0.35); }
+[data-theme="vault"] .buff-card.r4 {
+  color: #3a3a42; border-color: rgba(229, 228, 226, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 26px rgba(229, 228, 226, 0.4);
+}
+[data-theme="vault"] .buff-card.r4::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 48%, transparent 62%);
+  background-size: 260% 100%;
+  animation: foilSweep 3.6s linear infinite;
+}
+@keyframes foilSweep { 0% { background-position: 130% 0; } 100% { background-position: -130% 0; } }
+[data-theme="vault"] .bc-emoji { filter: sepia(0.5) saturate(0.7) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35)); }
+[data-theme="vault"] .bc-name { font-family: "Noto Serif SC"; font-weight: 900; color: var(--vault-ink-deep); letter-spacing: 2px; }
+[data-theme="vault"] .bc-sub { font-family: "Cormorant Garamond"; font-style: italic; }
+[data-theme="vault"] .bc-desc { color: rgba(var(--vault-inkdark-rgb), 0.8); }
+[data-theme="vault"] .bc-own { color: var(--vault-gold-shadow); }
+[data-theme="vault"] .bc-lock { background: rgba(var(--vault-inkdark-rgb), 0.08); border-color: rgba(var(--vault-inkdark-rgb), 0.35); border-radius: var(--radius-s); }
+[data-theme="vault"] .bc-lock.on { background: var(--vault-gold-deep); border-color: #7c6220; }
+[data-theme="vault"] .bc-pick {
+  background: rgba(var(--vault-inkdark-rgb), 0.05);
+  border: 1px solid rgba(var(--vault-inkdark-rgb), 0.5);
+  border-radius: var(--radius-s);
+  font-family: "Noto Serif SC"; letter-spacing: 5px; color: var(--vault-ink-deep);
+}
+[data-theme="vault"] .buff-card:hover .bc-pick { background: var(--vault-gold-deep); color: #f7f0de; border-color: #7c6220; }
+[data-theme="vault"] .buff-head h2 { font-family: "Noto Serif SC"; font-weight: 900; letter-spacing: 6px; color: var(--ink); }
+[data-theme="vault"] .buff-sub { color: rgba(var(--vault-ink-rgb), 0.55); }
+[data-theme="vault"] .buff-cash { color: var(--gold); }
+[data-theme="vault"] .btn-reroll { color: var(--gold); border-color: rgba(var(--vault-gold-rgb), 0.5); }
+[data-theme="vault"] .btn-reroll.free { color: var(--vault-gold-hi); border-color: var(--vault-gold-soft); }
+
+/* ═══════════ 电报 = 火漆密函 ═══════════ */
+[data-theme="vault"] .telegram {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(var(--vault-gold-deep-rgb), 0.07), transparent 60%),
+    var(--vault-paper);
+  color: var(--vault-ink-deep);
+  border: 1px solid rgba(var(--vault-brass-rgb), 0.6);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.75), inset 0 0 0 1px rgba(255, 255, 255, 0.6), inset 0 0 0 5px rgba(var(--vault-gold-deep-rgb), 0.12);
+  font-family: "Noto Serif SC", serif;
+}
+[data-theme="vault"] .tg-head { border-color: rgba(var(--vault-brass-rgb), 0.7); color: #6b5320; font-family: "Cormorant Garamond"; letter-spacing: 3px; }
+[data-theme="vault"] .tg-kicker { color: #8a2f2f; letter-spacing: 5px; font-family: "Cormorant Garamond"; font-style: italic; }
+[data-theme="vault"] .tg-title { font-family: "Noto Serif SC"; font-weight: 900; letter-spacing: 10px; }
+[data-theme="vault"] .tg-body { font-family: "Noto Serif SC"; }
+[data-theme="vault"] .tg-stamp {
+  /* 火漆 */
+  border: none; border-radius: 50%;
+  width: 92px; height: 92px;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(circle at 38% 32%, #c05555, #7e1f1f 68%, #5c1414);
+  color: rgba(255, 230, 220, 0.9);
+  font-family: "Noto Serif SC"; font-weight: 900; font-size: 15px; letter-spacing: 0;
+  width: 26px; word-break: break-all; text-align: center;
+  line-height: 1.35;
+  right: 24px; bottom: 64px;
+  box-shadow:
+    inset 0 0 0 3px rgba(90, 20, 20, 0.8),
+    inset 0 3px 8px rgba(255, 255, 255, 0.25),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.45),
+    0 6px 18px rgba(0, 0, 0, 0.5);
+  transform: rotate(10deg) scale(3);
+}
+[data-theme="vault"] .telegram.stamped .tg-stamp { transform: rotate(10deg) scale(1); }
+[data-theme="vault"] .tg-ok { background: var(--vault-ink-deep); color: var(--vault-paper); font-family: "Noto Serif SC"; letter-spacing: 5px; }
+
+/* ═══════════ 剧情 = 除名信 ═══════════ */
+[data-theme="vault"] .drama {
+  background: linear-gradient(170deg, #17352a, #0a1a13);
+  border: 1px solid rgba(var(--vault-gold-rgb), 0.45);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(0, 0, 0, 0.4);
+}
+[data-theme="vault"] .drama-title { font-family: "Noto Serif SC"; font-weight: 900; color: var(--ink); }
+[data-theme="vault"] .drama-liq { border-color: rgba(var(--vault-down-rgb), 0.7); }
+[data-theme="vault"] .drama-liq .drama-title { color: var(--vault-rose); text-shadow: 0 0 30px rgba(var(--vault-down-rgb), 0.5); }
+[data-theme="vault"] .drama-rescue .drama-title, [data-theme="vault"] .drama-revive .drama-title { color: var(--vault-gold-soft); text-shadow: 0 0 30px rgba(var(--vault-gold-rgb), 0.4); }
+[data-theme="vault"] .drama-body { color: rgba(var(--vault-ink-rgb), 0.72); font-family: "Noto Serif SC"; }
+[data-theme="vault"] .drama-num { font-family: "Cormorant Garamond"; color: var(--vault-gold-soft); }
+[data-theme="vault"] .drama-ok { background: linear-gradient(160deg, var(--gold), var(--vault-gold-deep)); color: var(--vault-green-deep); border: none; font-weight: 700; }
+
+/* ═══════════ 结算 = 年度对账单 ═══════════ */
+[data-theme="vault"] .rb-kicker { font-family: "Cormorant Garamond"; font-style: italic; letter-spacing: 5px; color: rgba(var(--vault-ink-rgb), 0.6); }
+[data-theme="vault"] .rb-line b { font-family: "Cormorant Garamond"; font-size: 15px; }
+[data-theme="vault"] .rb-line.peak b { color: var(--vault-gold-soft); }
+[data-theme="vault"] .res-banner.win .rb-final b { color: var(--vault-gold-soft); text-shadow: 0 0 40px rgba(var(--vault-gold-rgb), 0.4); }
+[data-theme="vault"] .res-banner.lose .rb-final b { color: var(--vault-rose); text-shadow: 0 0 40px rgba(var(--vault-down-rgb), 0.4); }
+[data-theme="vault"] .rb-mult { border: 1px solid rgba(var(--vault-gold-rgb), 0.6) !important; color: var(--gold) !important; font-family: "Cormorant Garamond"; }
+[data-theme="vault"] .rb-mult.bad { color: var(--vault-rose) !important; border-color: rgba(var(--vault-down-rgb), 0.6) !important; }
+[data-theme="vault"] .rs-title { color: var(--gold); font-family: "Cormorant Garamond"; font-style: italic; letter-spacing: 4px; }
+[data-theme="vault"] .rs-title::after { background: linear-gradient(90deg, rgba(var(--vault-gold-rgb), 0.5), transparent); }
+[data-theme="vault"] .curve-box { background: rgba(0, 0, 0, 0.3); border-color: rgba(var(--vault-gold-rgb), 0.35); border-radius: var(--vault-r-3); }
+[data-theme="vault"] .reveal-card .rc-back { background: repeating-linear-gradient(45deg, rgba(var(--vault-gold-rgb), 0.06), rgba(var(--vault-gold-rgb), 0.06) 10px, transparent 10px, transparent 20px), #0e241b; border-color: rgba(var(--vault-gold-rgb), 0.4); }
+[data-theme="vault"] .rc-q { color: rgba(var(--vault-gold-rgb), 0.4); font-family: "Cormorant Garamond"; }
+[data-theme="vault"] .reveal-card .rc-front { background: var(--vault-paper); color: var(--vault-ink-deep); border-color: rgba(var(--vault-brass-rgb), 0.6); }
+[data-theme="vault"] .rc-kicker { color: var(--vault-gold-shadow); font-family: "Cormorant Garamond"; font-style: italic; }
+[data-theme="vault"] .rc-front h3 { font-family: "Noto Serif SC"; font-weight: 900; }
+[data-theme="vault"] .rc-fact { color: rgba(var(--vault-inkdark-rgb), 0.8); }
+[data-theme="vault"] .rc-stats { color: rgba(var(--vault-inkdark-rgb), 0.7); }
+[data-theme="vault"] .rc-stats b { color: var(--vault-ink-deep); }
+[data-theme="vault"] .rc-stats b.good { color: #4c6b2f; } [data-theme="vault"] .rc-stats b.bad { color: #8a2f2f; }
+[data-theme="vault"] .rc-verdict { color: var(--vault-gold-shadow); font-style: italic; }
+[data-theme="vault"] .award-card { background: rgba(0, 0, 0, 0.25); border-color: rgba(var(--vault-gold-rgb), 0.35); border-radius: var(--vault-r-3); }
+[data-theme="vault"] .award-card.in { border-color: rgba(var(--vault-gold-rgb), 0.7); box-shadow: 0 0 24px -6px rgba(var(--vault-gold-rgb), 0.45); }
+[data-theme="vault"] .award-card b { color: var(--gold); font-family: "Noto Serif SC"; letter-spacing: 3px; }
+[data-theme="vault"] .profile-card { background: rgba(0, 0, 0, 0.25); border-color: rgba(var(--vault-gold-rgb), 0.4); border-radius: var(--vault-r-3); }
+[data-theme="vault"] .pf-main b { font-family: "Cormorant Garamond"; color: var(--vault-gold-soft); }
+[data-theme="vault"] .pf-main span { font-family: "Noto Serif SC"; font-weight: 900; letter-spacing: 6px; }
+[data-theme="vault"] .pf-bar i { background: linear-gradient(90deg, var(--vault-gold-deep), var(--vault-gold-soft)); border-radius: var(--vault-r-1); }
+[data-theme="vault"] .pf-figure b { color: var(--vault-gold-soft); font-family: "Noto Serif SC"; }
+[data-theme="vault"] .roast-card { background: rgba(0, 0, 0, 0.25); border-color: rgba(var(--vault-gold-rgb), 0.4); border-radius: var(--vault-r-3); }
+[data-theme="vault"] .roast-card p { color: rgba(var(--vault-ink-rgb), 0.85); font-family: "Noto Serif SC"; }
+[data-theme="vault"] .fs-row { background: rgba(0, 0, 0, 0.22); border-color: rgba(var(--vault-gold-rgb), 0.2); border-radius: var(--radius-s); }
+[data-theme="vault"] .fs-row.you { border-color: rgba(var(--vault-gold-rgb), 0.6); background: rgba(var(--vault-gold-rgb), 0.08); }
+[data-theme="vault"] .fs-nm { font-family: "Noto Serif SC"; }
+[data-theme="vault"] .fs-eq { font-family: "Cormorant Garamond"; font-size: 14px; }
+[data-theme="vault"] .fs-eq.good { color: var(--vault-gold-soft); } [data-theme="vault"] .fs-eq.bad { color: var(--vault-rose); }
+[data-theme="vault"] .br-chip { background: rgba(0, 0, 0, 0.25); border-color: rgba(var(--vault-gold-rgb), 0.35); }
+[data-theme="vault"] .br-chip i { color: var(--vault-gold-soft); }
+[data-theme="vault"] .br-sets { color: var(--gold); font-style: italic; }
+
+/* toast / flash */
+[data-theme="vault"] .toast { background: rgba(10, 24, 18, 0.95); border-color: rgba(var(--vault-gold-rgb), 0.4); color: #ecdfc0; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); border-radius: var(--radius-s); }
+[data-theme="vault"] .toast.good { color: var(--vault-gold-soft); border-color: rgba(var(--vault-up-rgb), 0.6); }
+[data-theme="vault"] .toast.bad { color: var(--vault-rose); border-color: rgba(var(--vault-down-rgb), 0.6); }
+[data-theme="vault"] .toast.gold { color: var(--vault-gold-hi); border-color: var(--vault-gold-soft); box-shadow: 0 0 18px -4px rgba(var(--vault-gold-rgb), 0.6); }
+[data-theme="vault"] .rs-main.good { color: var(--vault-gold-soft); text-shadow: 0 0 40px rgba(var(--vault-gold-rgb), 0.5); }
+[data-theme="vault"] .rs-main.bad { color: var(--vault-rose); text-shadow: 0 0 40px rgba(var(--vault-down-rgb), 0.5); }
+[data-theme="vault"] .center-flash b { font-family: "Noto Serif SC"; }
+[data-theme="vault"] .center-flash.long b { color: var(--vault-gold-soft); }
+[data-theme="vault"] .center-flash.short b { color: var(--vault-rose); }
+
+[data-theme="vault"] .overlay { background: rgba(6, 14, 10, 0.82); backdrop-filter: blur(7px); }
+[data-theme="vault"] .help-panel { background: #12291f; border-color: rgba(var(--vault-gold-rgb), 0.45); }
+[data-theme="vault"] .help-scroll h2 { font-family: "Noto Serif SC"; font-weight: 900; letter-spacing: 6px; }
+[data-theme="vault"] .pause-panel h2 { font-family: "Noto Serif SC"; letter-spacing: 14px; }
+
+[data-theme="vault"] ::selection { background: rgba(var(--vault-gold-rgb), 0.35); }
