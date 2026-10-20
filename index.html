@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="《全仓以赴》—— 盲开历史行情 × buff 构筑 × 物理体感，一局 10 分钟的金融肉鸽">
+<meta property="og:title" content="全仓以赴 Margin Call · 一局 10 分钟的金融肉鸽">
+<meta property="og:description" content="盲开历史行情 × buff 构筑 × 物理体感，8 套界面风格，零依赖纯前端。虚构行情演绎作品，非投资建议。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-cover.png">
+<title>全仓以赴 · Margin Call</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-title" content="全仓以赴">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href='data:application/manifest+json,{"name":"%E5%85%A8%E4%BB%93%E4%BB%A5%E8%B5%B4%20Margin%20Call","short_name":"%E5%85%A8%E4%BB%93%E4%BB%A5%E8%B5%B4","start_url":".","display":"standalone","background_color":"%2307070f","theme_color":"%2307070f","icons":[{"src":"assets/favicon.svg","sizes":"any","type":"image/svg+xml"}]}'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Chakra+Petch:wght@400;600;700&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=ZCOOL+KuaiLe&family=VT323&family=Share+Tech+Mono&family=Fredoka:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css?v=172">
+<link rel="stylesheet" href="css/base.css?v=172">
+<link id="theme-css" rel="stylesheet" href="css/themes/neon.css?v=172">
+</head>
+<body>
+<div id="app" data-phase="title">
+
+  <!-- ═══════════════ 标题 / 主题选择 ═══════════════ -->
+  <section id="screen-title" class="screen">
+    <div class="title-bg" aria-hidden="true"><canvas id="title-bg-canvas"></canvas></div>
+    <div class="title-scroll">
+      <header class="title-head">
+        <div class="logo" id="logo-slot"></div>
+        <p class="tagline" id="tagline-slot"></p>
+        <div class="title-meta">非投资建议 · 纯虚拟币 · 单局约 10 分钟</div>
+      </header>
+
+      <div class="theme-picker">
+        <h2 class="picker-label"><span>界面风格</span></h2>
+        <div class="theme-cards" id="theme-cards"></div>
+        <button class="rail-btn prev" id="rail-prev" aria-label="上一套界面" hidden>‹</button>
+        <button class="rail-btn next" id="rail-next" aria-label="下一套界面">›</button>
+      </div>
+
+      <div class="title-stats" id="title-stats"></div>
+
+      <div class="title-actions">
+        <div class="mode-switch" role="radiogroup" aria-label="游戏模式">
+          <button class="mode-opt on" id="mode-solo" role="radio" aria-checked="true"><b>单人模式</b><small>VS 5 名 AI</small></button>
+          <button class="mode-opt soon" id="mode-multi" role="radio" aria-checked="false"><b>多人对战</b><small>敬请期待</small></button>
+        </div>
+        <button class="btn btn-primary btn-xl" id="btn-start"><span class="btn-label">进入盘口</span></button>
+        <div class="title-actions-row">
+          <button class="btn btn-ghost" id="btn-help">玩法</button>
+          <button class="btn btn-ghost" id="btn-gyro" hidden>开启陀螺仪</button>
+          <button class="btn btn-ghost" id="btn-sound">音效开</button>
+        </div>
+      </div>
+      <footer class="title-foot">盲开历史行情 · 三流派构筑 · 15 轮强制结算 · v1.9.3</footer>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 对局 ═══════════════ -->
+  <section id="screen-game" class="screen" hidden>
+    <header id="hud">
+      <div class="hud-row1">
+        <div class="hud-round">
+          <div class="round-num"><span id="hud-round-num">1</span><small>/15</small></div>
+          <label id="hud-phase-name">构筑</label>
+        </div>
+        <div class="hud-money">
+          <div class="equity" id="hud-equity">¥10,000</div>
+          <div class="pnl" id="hud-pnl">±0.0%</div>
+        </div>
+        <div class="hud-right">
+          <div class="hud-cash" id="hud-cash" title="可用资金">¥10,000</div>
+          <button class="icon-btn" id="btn-pause" aria-label="暂停">❚❚</button>
+        </div>
+      </div>
+      <div class="hud-row2">
+        <div class="tremor-meter" id="tremor-meter" title="手抖指数：重仓时手真的会抖">
+          <label>手抖</label>
+          <div class="tremor-bar"><i id="tremor-fill"></i><b id="tremor-ghost"></b></div>
+          <span class="tremor-val" id="tremor-val">0</span>
+        </div>
+        <div class="regulator-lights" id="reg-lights"></div>
+      </div>
+    </header>
+
+    <main id="market">
+      <canvas id="chart"></canvas>
+      <div class="chart-overlay" id="chart-overlay"></div>
+      <div class="pos-card" id="pos-card" hidden>
+        <div class="pos-dir" id="pos-dir">多</div>
+        <div class="pos-grid">
+          <div><label>杠杆</label><b id="pos-lev">—</b></div>
+          <div><label>名义</label><b id="pos-notional">—</b></div>
+          <div><label>开仓价</label><b id="pos-entry">—</b></div>
+          <div id="pos-age-wrap" hidden><label>已持</label><b id="pos-age">—</b></div>
+          <div><label>浮盈亏</label><b id="pos-upnl">—</b></div>
+        </div>
+        <div class="pos-liq" id="pos-liq">强平价 <b>—</b> · 距离 <b>—</b></div>
+      </div>
+      <div class="hint-stack" id="hint-stack"></div>
+    </main>
+
+    <aside id="rank-strip" aria-label="实时排名"></aside>
+
+    <div id="slots-bar" aria-label="Buff 槽位"></div>
+
+    <div id="engine-row">
+      <div id="status-row" aria-label="状态效果"></div>
+      <button id="mult-badge" aria-label="收益倍率明细">
+        <label>收益倍率</label>
+        <b id="mult-val">×1.00</b>
+      </button>
+    </div>
+
+    <footer id="dock">
+      <div class="risk-row" id="risk-row" aria-label="风险档位">
+        <span class="risk-label">风险</span>
+        <button class="risk-chip" data-risk="bare">裸奔<small>×1.15</small></button>
+        <button class="risk-chip" data-risk="sl">损13盈13</button>
+        <button class="risk-chip" data-risk="cut">只割不锁<small>费2%</small></button>
+        <button class="risk-chip" data-risk="both">双保险</button>
+        <span class="size-group" id="size-group" aria-label="仓位档位">
+          <button class="size-chip" data-size="0.4">轻仓</button>
+          <button class="size-chip on" data-size="1">标准</button>
+          <button class="size-chip" data-size="1.75">重仓</button>
+        </span>
+        <span class="risk-hint" id="risk-hint"></span>
+      </div>
+      <div class="charge-zone">
+        <button class="cashout-btn" id="btn-cashout" hidden aria-label="盘中落袋"><span class="co-k">落袋</span><b id="co-val">+¥0</b><small class="co-cost" id="co-cost" hidden></small><small class="co-key">空格</small></button>
+        <button class="trade-btn buy" id="btn-buy" aria-label="开多">
+          <i class="charge-fill"></i>
+          <span class="t-lev" id="buy-lev">1x</span>
+          <span class="t-label" id="buy-label">开多</span>
+        </button>
+        <div class="charge-core" id="charge-core">
+          <div class="lev-big" id="lev-big">1<span>x</span></div>
+          <div class="lev-track"><i id="lev-needle"></i><u class="lev-notch" style="left:0%"></u><u class="lev-notch" style="left:16%"></u><u class="lev-notch" style="left:33%"></u><u class="lev-notch" style="left:50%"></u><u class="lev-notch" style="left:66%"></u><u class="lev-notch" style="left:83%"></u><u class="lev-notch" style="left:100%"></u></div>
+          <div class="lev-hint" id="lev-hint">长按蓄力 · 松手下单</div>
+        </div>
+        <button class="trade-btn sell" id="btn-sell" aria-label="开空">
+          <i class="charge-fill"></i>
+          <span class="t-lev" id="sell-lev">1x</span>
+          <span class="t-label" id="sell-label">开空</span>
+        </button>
+      </div>
+      <div class="dock-row2">
+        <button class="btn btn-close" id="btn-close-pos" disabled>全部平仓</button>
+        <button class="btn btn-hold" id="btn-hold">本轮不动</button>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ═══════════════ 结算 ═══════════════ -->
+  <section id="screen-result" class="screen" hidden>
+    <div class="result-scroll" id="result-scroll"></div>
+  </section>
+
+  <!-- ═══════════════ BUFF 构筑层 ═══════════════ -->
+  <div id="overlay-buffs" class="overlay" hidden>
+    <div class="buff-panel">
+      <header class="buff-head">
+        <button class="icon-btn buff-pause" id="btn-pause-buff" aria-label="暂停">❚❚</button>
+        <h2 id="buff-title">选择一张内幕</h2>
+        <div class="buff-sub" id="buff-sub">锁 1 · 刷新 · 跳过返现</div>
+        <div class="school-bar" id="school-bar" aria-label="流派进度（点开图鉴）"></div>
+        <div class="buff-cash"><span id="buff-cash-wrap">资金 <b>¥10,000</b></span><span class="buff-mult">倍率 <b id="buff-mult-val">×1.00</b></span></div>
+      </header>
+      <div class="buff-cards" id="buff-cards"></div>
+      <div class="replace-row" id="replace-row" hidden>
+        <div class="rr-label">点击要顶替的旧卡</div>
+        <div class="rr-slots" id="rr-slots"></div>
+      </div>
+      <footer class="buff-foot">
+        <button class="btn btn-reroll" id="btn-reroll"><span>刷新</span><b id="reroll-cost">¥500</b></button>
+        <button class="btn btn-ghost" id="btn-skip-buff">跳过 <small>+¥200</small></button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 监管电报层 ═══════════════ -->
+  <div id="overlay-telegram" class="overlay" hidden>
+    <div class="telegram" id="telegram">
+      <div class="tg-head"><span id="tg-agency">SEC</span><span id="tg-code">— — —</span></div>
+      <div class="tg-kicker" id="tg-kicker">紧急电文</div>
+      <h3 class="tg-title" id="tg-title"></h3>
+      <div class="tg-body" id="tg-body"></div>
+      <div class="tg-stamp" id="tg-stamp"></div>
+      <button class="btn btn-primary tg-ok" id="tg-ok">收到</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 剧情层（爆仓 / 救市 / 大奖） ═══════════════ -->
+  <div id="overlay-drama" class="overlay" hidden>
+    <div class="drama" id="drama">
+      <div class="drama-icon" id="drama-icon"></div>
+      <h2 class="drama-title" id="drama-title"></h2>
+      <p class="drama-body" id="drama-body"></p>
+      <div class="drama-num" id="drama-num"></div>
+      <button class="btn btn-primary drama-ok" id="drama-ok">继续</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 情报弹出层 ═══════════════ -->
+  <div id="overlay-peek" class="overlay overlay-soft" hidden>
+    <div class="peek-card" id="peek-card">
+      <div class="peek-kicker" id="peek-kicker">内幕消息</div>
+      <div class="peek-main" id="peek-main"></div>
+      <div class="peek-note" id="peek-note"></div>
+      <button class="btn btn-primary peek-ok" id="peek-ok">明白</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 倍率明细 ═══════════════ -->
+  <div id="overlay-mult" class="overlay overlay-soft" hidden>
+    <div class="mult-panel">
+      <div class="mp-head"><label>收益倍率引擎</label><b id="mp-total">×1.00</b></div>
+      <div class="mp-sub">基础 ×(1+加法) × 条件乘法</div>
+      <div class="mp-list" id="mp-list"></div>
+      <div class="mp-hint">点按关闭</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 流派图鉴 ═══════════════ -->
+  <div id="overlay-school" class="overlay overlay-soft" hidden>
+    <div class="school-panel">
+      <button class="icon-btn school-close" id="btn-school-close">✕</button>
+      <div class="school-scroll" id="school-scroll"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 玩法说明 ═══════════════ -->
+  <div id="overlay-help" class="overlay" hidden>
+    <div class="help-panel">
+      <button class="icon-btn help-close" id="btn-help-close">✕</button>
+      <div class="help-scroll" id="help-scroll"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 暂停 ═══════════════ -->
+  <div id="overlay-pause" class="overlay overlay-soft" hidden>
+    <div class="pause-panel">
+      <h2>暂停</h2>
+      <button class="btn btn-primary" id="btn-resume">继续</button>
+      <button class="btn btn-ghost" id="btn-theme-cycle">界面风格</button>
+      <button class="btn btn-ghost" id="btn-sound2">音效开</button>
+      <button class="btn btn-ghost" id="btn-quit">结束本局</button>
+    </div>
+  </div>
+
+  <div id="toast-layer" aria-live="polite"></div>
+  <div id="float-layer" aria-hidden="true"></div>
+  <div id="fx-vignette" aria-hidden="true"></div>
+  <canvas id="fx-layer" aria-hidden="true"></canvas>
+</div>
+
+<script src="js/core/util.js?v=172"></script>
+<script src="js/core/market.js?v=172"></script>
+<script src="js/core/buffs.js?v=172"></script>
+<script src="js/core/bots.js?v=172"></script>
+<script src="js/core/tremor.js?v=172"></script>
+<script src="js/core/audio.js?v=172"></script>
+<script src="js/core/engine.js?v=172"></script>
+<script src="js/ui/chart.js?v=172"></script>
+<script src="js/ui/theme.js?v=172"></script>
+<script src="js/ui/app.js?v=172"></script>
+<script src="js/themes/neon.js?v=172"></script>
+<script src="js/themes/sumi.js?v=172"></script>
+<script src="js/themes/crt.js?v=172"></script>
+<script src="js/themes/pop.js?v=172"></script>
+<script src="js/themes/vault.js?v=172"></script>
+<script src="js/themes/receipt.js?v=172"></script>
+<script src="js/themes/vapor.js?v=172"></script>
+<script src="js/themes/tarot.js?v=172"></script>
+<script src="js/main.js?v=172"></script>
+</body>
+</html>
