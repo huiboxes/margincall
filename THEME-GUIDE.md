@@ -97,9 +97,13 @@ copy 内不出现"皮肤/换装/demo"字样。腔调保留在标题与句尾金�
 - 可覆盖变量：`--bg --bg-2 --panel --panel-2 --card --line --ink --ink-dim
   --ink-faint --up --down --gold --accent --accent-2 --warn --font-display
   --font-body --font-num --radius-s/m/l`。
-- 字体只能用 `index.html` 已预载的：Orbitron / Chakra Petch / Ma Shan Zheng /
+- 字体是同源自托管的子集（`css/fonts.css` + `assets/fonts/*.woff2`，由 `tools/build-fonts.py` 生成，
+  不依赖 Google Fonts / 任何外部域名）：Orbitron / Chakra Petch / Ma Shan Zheng /
   ZCOOL XiaoWei / ZCOOL KuaiLe / VT323 / Share Tech Mono / Fredoka /
   Cormorant Garamond / Noto Sans SC / Noto Serif SC（+系统回退）。
+  新增字体家族或改了中文文案后跑一次 `python3 tools/build-fonts.py`（需要 `fonttools` + `brotli`，
+  构建时要能访问 `raw.githubusercontent.com`；字体产物已入库，日常运行不需要重跑），
+  脚本会扫描 js/css/html 里出现过的所有字符重新子集化；漏掉的字会回退系统字体，不会出豆腐块。
 - 纹理一律 CSS 生成（渐变 / repeating-gradient / radial / SVG data-uri /
   box-shadow / mask），**不引外部图片**。
 - 关键 DOM 钩子（完整清单读 `css/base.css`）：

@@ -15,12 +15,23 @@
 <meta name="apple-mobile-web-app-title" content="全仓以赴">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href='data:application/manifest+json,{"name":"%E5%85%A8%E4%BB%93%E4%BB%A5%E8%B5%B4%20Margin%20Call","short_name":"%E5%85%A8%E4%BB%93%E4%BB%A5%E8%B5%B4","start_url":".","display":"standalone","background_color":"%2307070f","theme_color":"%2307070f","icons":[{"src":"assets/favicon.svg","sizes":"any","type":"image/svg+xml"}]}'>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Chakra+Petch:wght@400;600;700&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=ZCOOL+KuaiLe&family=VT323&family=Share+Tech+Mono&family=Fredoka:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/tokens.css?v=172">
-<link rel="stylesheet" href="css/base.css?v=172">
-<link id="theme-css" rel="stylesheet" href="css/themes/neon.css?v=172">
+<link rel="stylesheet" href="css/fonts.css?v=174">
+<link rel="stylesheet" href="css/tokens.css?v=174">
+<link rel="stylesheet" href="css/base.css?v=174">
+<link id="theme-css" rel="stylesheet">
+<noscript><link rel="stylesheet" href="css/themes/neon.css?v=174"></noscript>
+<script>
+/* 首屏引导：按上次所选主题先挂上主题 CSS，省掉「默认主题加载完再换」的二次请求与闪烁。
+   字体是同源自托管的子集（css/fonts.css，由 tools/build-fonts.py 生成），不依赖任何外部域名。 */
+(function () {
+  var THEME_IDS = ['neon', 'sumi', 'crt', 'pop', 'vault', 'receipt', 'vapor', 'tarot'];
+  var id = 'neon';
+  try { id = JSON.parse(localStorage.getItem('margincall_save_v1') || '{}').theme || 'neon'; } catch (e) { /* 隐私模式/localStorage 被禁 */ }
+  if (THEME_IDS.indexOf(id) < 0) id = 'neon';
+  document.documentElement.setAttribute('data-theme', id);
+  document.getElementById('theme-css').href = 'css/themes/' + id + '.css?v=174';
+})();
+</script>
 </head>
 <body>
 <div id="app" data-phase="title">
@@ -258,24 +269,24 @@
   <canvas id="fx-layer" aria-hidden="true"></canvas>
 </div>
 
-<script src="js/core/util.js?v=172"></script>
-<script src="js/core/market.js?v=172"></script>
-<script src="js/core/buffs.js?v=172"></script>
-<script src="js/core/bots.js?v=172"></script>
-<script src="js/core/tremor.js?v=172"></script>
-<script src="js/core/audio.js?v=172"></script>
-<script src="js/core/engine.js?v=172"></script>
-<script src="js/ui/chart.js?v=172"></script>
-<script src="js/ui/theme.js?v=172"></script>
-<script src="js/ui/app.js?v=172"></script>
-<script src="js/themes/neon.js?v=172"></script>
-<script src="js/themes/sumi.js?v=172"></script>
-<script src="js/themes/crt.js?v=172"></script>
-<script src="js/themes/pop.js?v=172"></script>
-<script src="js/themes/vault.js?v=172"></script>
-<script src="js/themes/receipt.js?v=172"></script>
-<script src="js/themes/vapor.js?v=172"></script>
-<script src="js/themes/tarot.js?v=172"></script>
-<script src="js/main.js?v=172"></script>
+<script defer src="js/core/util.js?v=174"></script>
+<script defer src="js/core/market.js?v=174"></script>
+<script defer src="js/core/buffs.js?v=174"></script>
+<script defer src="js/core/bots.js?v=174"></script>
+<script defer src="js/core/tremor.js?v=174"></script>
+<script defer src="js/core/audio.js?v=174"></script>
+<script defer src="js/core/engine.js?v=174"></script>
+<script defer src="js/ui/chart.js?v=174"></script>
+<script defer src="js/ui/theme.js?v=174"></script>
+<script defer src="js/ui/app.js?v=174"></script>
+<script defer src="js/themes/neon.js?v=174"></script>
+<script defer src="js/themes/sumi.js?v=174"></script>
+<script defer src="js/themes/crt.js?v=174"></script>
+<script defer src="js/themes/pop.js?v=174"></script>
+<script defer src="js/themes/vault.js?v=174"></script>
+<script defer src="js/themes/receipt.js?v=174"></script>
+<script defer src="js/themes/vapor.js?v=174"></script>
+<script defer src="js/themes/tarot.js?v=174"></script>
+<script defer src="js/main.js?v=174"></script>
 </body>
 </html>

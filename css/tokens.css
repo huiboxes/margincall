@@ -134,8 +134,9 @@
   --accent-2: var(--c-accent-2);
   --warn: var(--c-warn);
 
-  --font-display: "Noto Sans SC", system-ui, sans-serif;
-  --font-body: "Noto Sans SC", system-ui, sans-serif;
+  /* 字体晚到时会先用系统中文黑体顶上（font-display: swap），措辞栈尽量贴近 Noto Sans SC 的字宽 */
+  --font-display: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
   --font-num: ui-monospace, "SF Mono", "Chakra Petch", monospace;
 
   --radius-s: var(--r-s);
