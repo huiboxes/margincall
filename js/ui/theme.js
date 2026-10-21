@@ -39,7 +39,8 @@
     currentId = id;
     document.documentElement.setAttribute('data-theme', id);
     const link = document.getElementById('theme-css');
-    if (link) link.href = def.css;
+    // 首屏脚本已按存档主题挂好样式（带版本号）：路径相同就别重设 href，否则会白白再请求一次
+    if (link && (link.getAttribute('href') || '').split('?')[0] !== def.css) link.href = def.css;
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta && def.accentColor) meta.setAttribute('content', def.accentColor);
     if (def.audio) MC.Audio.setPreset(def.audio);

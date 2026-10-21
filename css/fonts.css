@@ -1,0 +1,146 @@
+/* 自动生成：python3 tools/build-fonts.py —— 不要手改 */
+/* 缺字回退系统字体，不会出豆腐块；改文案后重跑脚本，并把 VERSION 加一 */
+
+@font-face {
+  font-family: "Noto Sans SC";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-2E7F, U+FB00-FEFF, U+FFF0-FFFF;
+  src: url("../assets/fonts/noto-sans-sc-latin.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Noto Sans SC";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+2E80-9FFF, U+F900-FAFF, U+FF00-FFEF, U+20000-2FA1F;
+  src: url("../assets/fonts/noto-sans-sc-cjk.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Noto Serif SC";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  unicode-range: U+0000-2E7F, U+FB00-FEFF, U+FFF0-FFFF;
+  src: url("../assets/fonts/noto-serif-sc-latin.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Noto Serif SC";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  unicode-range: U+2E80-9FFF, U+F900-FAFF, U+FF00-FFEF, U+20000-2FA1F;
+  src: url("../assets/fonts/noto-serif-sc-cjk.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Ma Shan Zheng";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-2E7F, U+FB00-FEFF, U+FFF0-FFFF;
+  src: url("../assets/fonts/ma-shan-zheng-latin.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Ma Shan Zheng";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+2E80-9FFF, U+F900-FAFF, U+FF00-FFEF, U+20000-2FA1F;
+  src: url("../assets/fonts/ma-shan-zheng-cjk.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "ZCOOL XiaoWei";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-2E7F, U+FB00-FEFF, U+FFF0-FFFF;
+  src: url("../assets/fonts/zcool-xiaowei-latin.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "ZCOOL XiaoWei";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+2E80-9FFF, U+F900-FAFF, U+FF00-FFEF, U+20000-2FA1F;
+  src: url("../assets/fonts/zcool-xiaowei-cjk.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "ZCOOL KuaiLe";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-2E7F, U+FB00-FEFF, U+FFF0-FFFF;
+  src: url("../assets/fonts/zcool-kuaile-latin.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "ZCOOL KuaiLe";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+2E80-9FFF, U+F900-FAFF, U+FF00-FFEF, U+20000-2FA1F;
+  src: url("../assets/fonts/zcool-kuaile-cjk.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Orbitron";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../assets/fonts/orbitron.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Fredoka";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonts/fredoka.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonts/cormorant-garamond.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonts/cormorant-garamond-i.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/chakra-petch-400.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonts/chakra-petch-600.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/chakra-petch-700.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "VT323";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/vt323.woff2?v=174") format("woff2");
+}
+@font-face {
+  font-family: "Share Tech Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/share-tech-mono.woff2?v=174") format("woff2");
+}

@@ -3,6 +3,9 @@ tools/node_modules/
 tools/shots/
 node_modules/
 
+# 字体构建缓存（源 ttf 不进仓库，子集产物在 assets/fonts/）
+.cache/
+
 # 系统/编辑器
 .DS_Store
 Thumbs.db
