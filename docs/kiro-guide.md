@@ -24,3 +24,21 @@
 2. 保存源码后关注 Source Quality hook；它会拒绝新增外部资源、框架和超长文件。
 3. 对有风险的设计改动：调用 `game-designer` 或 `game-qa` 审查。
 4. 提交前运行：`node scripts/hooks/check-source.mjs`。
+
+## 两条工作流
+
+Kiro 的工作流从 Workflow 面板启动，不会自动变成 Claude Code 的 `/goal` 或 `/loop` 斜杠命令。
+
+- **`goal`**：传入一个 Spec 路径。它逐项实现未完成的必需任务，运行验证，再由 `game-qa` 验收。所有必需任务和 QA 都通过才停止；12 轮仍未完成会暂停，等待你决定是否继续。
+- **`ralph`**：仅在你验收 `goal` 的结果后启动。传入同一个 Spec 路径和你的反馈。每轮并行调用 `game-designer` 与 `game-qa`，由实现代理最多修三个范围内问题。连续两轮双审查均为 `STABLE` 且检查通过时停止，最多 20 轮。
+
+示例输入：
+
+```text
+goal
+spec_path: .kiro/specs/mobile-controls-and-game-feel
+
+ralph
+spec_path: .kiro/specs/mobile-controls-and-game-feel
+feedback: 真机长按时偶尔误触，优先检查取消和反馈清晰度。
+```
