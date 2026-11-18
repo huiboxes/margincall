@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Verify After Spec Task",
+      "trigger": "PostTaskExec",
+      "description": "每个 Spec 任务完成后运行源码约束和任务进度检查。",
+      "action": {
+        "type": "command",
+        "command": "node scripts/hooks/check-source.mjs; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; node scripts/hooks/spec-task-check.mjs",
+        "timeout": 60
+      }
+    }
+  ]
+}

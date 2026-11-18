@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Confirm Dangerous Commands",
+      "trigger": "PreToolUse",
+      "description": "执行可能删除工作或重写历史的命令前要求人工确认。",
+      "matcher": "^(execute_pwsh|control_pwsh_process)$",
+      "action": {
+        "type": "command",
+        "command": "node scripts/hooks/confirm-danger.mjs",
+        "timeout": 10
+      }
+    }
+  ]
+}

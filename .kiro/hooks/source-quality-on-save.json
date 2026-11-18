@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Source Quality on Save",
+      "trigger": "PostFileSave",
+      "description": "保存游戏源文件后检查行数棘轮、外部资源和框架引用。",
+      "matcher": "(^|[\\\\/])(js[\\\\/].*\\.(js|mjs)|index\\.html|css[\\\\/].*\\.css)$",
+      "action": {
+        "type": "command",
+        "command": "node scripts/hooks/check-source.mjs",
+        "timeout": 30
+      }
+    }
+  ]
+}
